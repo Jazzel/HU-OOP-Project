@@ -9,6 +9,8 @@
 #include "ObjectCreater.hpp"
 #include "GameState.hpp"
 #include "Level.hpp"
+#include "Obstacles.hpp"
+#include "Vehicle.hpp"
 using namespace std;
 
 /**
@@ -49,10 +51,13 @@ class Bhuruz
 {
 private:
     vector<Unit *> objects;
+
     vector<Asset *> screenObjects;
+    vector<Obstacles *> obstaclesObjects;
 
     GameState gameState;
     Level level;
+    Vehicle *vehicle;
     bool _levelScreen = 0;
 
 public:

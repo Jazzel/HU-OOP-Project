@@ -211,7 +211,14 @@ void Bhuruz::showScreens()
 
 void Bhuruz::startGame()
 {
-    gameState = GameState::GAME_OVER;
+    // gameState = GameState::GAME_OVER;
+
+    Obstacles *obstacles = new Obstacles();
+    obstacles->initObstacles();
+
+    vehicle = new Vehicle();
+    vehicle->initVehicle();
+
     Bhuruz::showScreens();
 }
 
