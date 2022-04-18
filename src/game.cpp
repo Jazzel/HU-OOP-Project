@@ -4,7 +4,11 @@
 
 SDL_Renderer *Drawing::gRenderer = NULL;
 SDL_Texture *Drawing::startAssets = NULL;
+SDL_Texture *Drawing::gameAssets = NULL;
 SDL_Texture *Drawing::assets = NULL;
+SDL_Texture *Drawing::levelOne = NULL;
+SDL_Texture *Drawing::levelTwo = NULL;
+SDL_Texture *Drawing::levelThree = NULL;
 
 bool Game::init()
 {
@@ -66,7 +70,13 @@ bool Game::loadMedia()
 	bool success = true;
 
 	Drawing::startAssets = loadTexture("assets/start-assets.png");
+	Drawing::gameAssets = loadTexture("assets/game-assets.png");
 	Drawing::assets = loadTexture("assets.png");
+
+	Drawing::levelOne = loadTexture("assets/level1.png");
+	Drawing::levelTwo = loadTexture("assets/level2.png");
+	Drawing::levelThree = loadTexture("assets/level3.png");
+
 	gTexture = loadTexture("assets/background.png");
 	if (Drawing::startAssets == NULL || Drawing::assets == NULL || gTexture == NULL)
 	{

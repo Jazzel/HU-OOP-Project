@@ -39,11 +39,29 @@ int Bhuruz::generateRandomInteger(int min, int max)
 void Bhuruz::drawObjects()
 {
 
-    // pig = new Pigeon(0, 0);
-    for (int i = 0; i < objects.size(); i++)
+    // // pig = new Pigeon(0, 0);
+    if (gameState == GameState::RUNNING)
     {
-        objects[i]->draw();
-        /* code */
+        for (int i = 0; i < gameObjects.size(); i++)
+        {
+            switch (level)
+            {
+            case Level::EASY:
+                SDL_RenderCopy(Drawing::gRenderer, Drawing::levelOne, &gameObjects[i]->src, &gameObjects[i]->mover);
+
+                break;
+            case Level::MEDIUM:
+                SDL_RenderCopy(Drawing::gRenderer, Drawing::levelTwo, &gameObjects[i]->src, &gameObjects[i]->mover);
+                break;
+            case Level::HARD:
+                SDL_RenderCopy(Drawing::gRenderer, Drawing::levelThree, &gameObjects[i]->src, &gameObjects[i]->mover);
+                break;
+
+            default:
+                break;
+            }
+        }
+        vehicle->draw();
     }
 
     for (int i = 0; i < screenObjects.size(); i++)
@@ -166,17 +184,22 @@ void Bhuruz::showScreens()
     case GameState::RUNNING:
     {
 
-        // Todo: vehicle
+        // ? vehicle
+        vehicle = new Vehicle();
 
-        // Todo: level background
+        // ? level background
+        ScreenObject *levelBackground = new ScreenObject();
+
+        levelBackground->src = {0, 0, 2560, 1440};
+        levelBackground->mover = {0, 0, 1400, 780};
+
+        gameObjects.push_back(levelBackground);
 
         // Todo: score | speed
 
-        // Todo: gameStart
-
         // Todo: obstacles
 
-        Bhuruz::startGame();
+        // Bhuruz::startGame();
 
         break;
     }
@@ -213,13 +236,13 @@ void Bhuruz::startGame()
 {
     // gameState = GameState::GAME_OVER;
 
-    Obstacles *obstacles = new Obstacles();
-    obstacles->initObstacles();
+    // Obstacles *obstacles = new Obstacles();
+    // obstacles->initObstacles();
 
-    vehicle = new Vehicle();
-    vehicle->initVehicle();
+    // ScreenObject *vehicle = new Vehicle();
+    // gameObjects.push_back(vehicle);
 
-    Bhuruz::showScreens();
+    // Bhuruz::showScreens();
 }
 
 void Bhuruz::onClickHandler(int x, int y)
@@ -250,7 +273,7 @@ void Bhuruz::onClickHandler(int x, int y)
             gameState = GameState::IDLE;
         }
     }
-    else
+    else if (gameState == GameState::IDLE)
     {
         if (x > 430 && y > 350 && x < 943 && y < 520)
         {
@@ -262,7 +285,10 @@ void Bhuruz::onClickHandler(int x, int y)
             cout << "Credits clicked !" << endl;
             gameState = GameState::CREDITS;
         }
-        else if (x > 1000 && y > 690 && x < 1200 && y < 770)
+    }
+    else if (gameState == GameState::CREDITS || gameState == GameState::LEVEL_SELECT)
+    {
+        if (x > 1000 && y > 690 && x < 1200 && y < 770)
         {
             cout << "Go back clicked !" << endl;
             gameState = GameState::IDLE;
@@ -298,24 +324,10 @@ void Bhuruz::createObject(int x, int y)
 
 void Bhuruz::makeMove(string direction)
 {
-
-    std::cout
-        << "Direction: " << direction << std::endl;
-    if (direction == "RIGHT")
+    // Todo: check if vehicle is coming !
+    if (gameState == GameState::RUNNING)
     {
-        cout << " fly \n";
-        for (int i = 0; i < objects.size(); i++)
-        {
-            ((Pigeon *)objects[i])->fly("right");
-        }
-    }
-    if (direction == "LEFT")
-    {
-        cout << " fly \n";
-        for (int i = 0; i < objects.size(); i++)
-        {
-            ((Pigeon *)objects[i])->fly("left");
-        }
+        vehicle->initVehicleMovement(direction);
     }
 }
 
@@ -327,10 +339,10 @@ void Bhuruz::makeMove(string direction)
 Bhuruz::~Bhuruz()
 {
 
-    for (Unit *object : objects)
-    {
-        delete object;
-        object = NULL;
-    }
-    objects.clear();
+    // for (Unit *object : objects)
+    // {
+    //     delete object;
+    //     object = NULL;
+    // }
+    // objects.clear();
 }

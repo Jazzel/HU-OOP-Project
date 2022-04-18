@@ -50,13 +50,13 @@ public:
 class Bhuruz
 {
 private:
-    vector<Unit *> objects;
-
+    vector<ScreenObject *> gameObjects;
     vector<Asset *> screenObjects;
     vector<Obstacles *> obstaclesObjects;
 
     GameState gameState;
     Level level;
+
     Vehicle *vehicle;
     bool _levelScreen = 0;
 

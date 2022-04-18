@@ -8,4 +8,9 @@ public:
     // global reference to png image sheets
     static SDL_Texture *assets;
     static SDL_Texture *startAssets;
+    static SDL_Texture *gameAssets;
+
+    static SDL_Texture *levelOne;
+    static SDL_Texture *levelTwo;
+    static SDL_Texture *levelThree;
 };
