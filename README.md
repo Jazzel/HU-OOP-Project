@@ -1,6 +1,6 @@
-## Bhuruz
+# Bhuruz
 
-### OOP Project
+## OOP Project
 
 Bhuruz is a obstacle tackling survival game in which the player has to tackle obstacles while moving through a
 cylindrical tunnel as a bike type object. The start-end mechanism of the game depends on the health of the player

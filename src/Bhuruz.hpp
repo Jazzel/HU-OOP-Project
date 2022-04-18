@@ -8,6 +8,7 @@
 #include "unit.hpp"
 #include "ObjectCreater.hpp"
 #include "GameState.hpp"
+#include "Level.hpp"
 using namespace std;
 
 /**
@@ -47,13 +48,12 @@ public:
 class Bhuruz
 {
 private:
-    Pigeon *pig;
-
     vector<Unit *> objects;
     vector<Asset *> screenObjects;
 
     GameState gameState;
-    bool level = 0;
+    Level level;
+    bool _levelScreen = 0;
 
 public:
     void drawObjects();
@@ -62,6 +62,8 @@ public:
     void makeMove(string);
     void init();
     void onClickHandler(int, int);
+    void startGame();
+
     // void showCreditsScreen();
     // void showStartScreen();
     // void showLevelScreen();
