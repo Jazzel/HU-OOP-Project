@@ -1,10 +1,15 @@
+#include "drawing.hpp"
+#include <SDL.h>
 class Obstacles
 {
-private:
-    /* data */
+protected:
+    SDL_Rect srcRect, moverRect;
+    int frame;
+    //string type;
 public:
-    Obstacles(/* args */);
+    Obstacles();
+    Obstacles (SDL_Rect srcRect);
     ~Obstacles();
 
-    void initObstacles();
+    void draw();
 };

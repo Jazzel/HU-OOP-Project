@@ -17,20 +17,20 @@
  * ? @return Unit *
  * * Unit pointing object of typeid (Bee, Butterfly or Pigeon)
  */
-Unit *ObjectCreater::getObject(int x, int y, int random)
+Unit *ObjectCreater::getObject(int random)
 {
 
     Unit *object;
     switch (random)
     {
     case 1:
-        object = new Pigeon(x, y);
+        object = new Pigeon();
         break;
     case 2:
-        object = new Bee(x, y);
+        object = new Bee();
         break;
     case 3:
-        object = new Butterfly(x, y);
+        object = new Butterfly();
         break;
     };
 
