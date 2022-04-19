@@ -12,18 +12,18 @@ void Vehicle::initVehicleMovement(string direction)
         {
             mover.x += speed;
         }
-        else if (mover.x >= 950 && mover.y >= 150)
-        {
-            mover.y -= speed;
-        }
-        else if (mover.y >= 50 && mover.x >= 320)
-        {
-            mover.x -= speed;
-        }
-        else
-        {
-            mover.y += speed;
-        }
+        // else if (mover.x >= 950 && mover.y >= 150)
+        // {
+        //     mover.y -= speed;
+        // }
+        // else if (mover.y >= 50 && mover.x >= 320)
+        // {
+        //     mover.x -= speed;
+        // }
+        // else
+        // {
+        //     mover.y += speed;
+        // }
     }
     else if (direction == "LEFT")
     {
@@ -31,18 +31,18 @@ void Vehicle::initVehicleMovement(string direction)
         {
             mover.x -= speed;
         }
-        else if (mover.y == 100 && mover.x <= 950)
-        {
-            mover.x += speed;
-        }
-        else if (mover.x >= 320 && mover.y <= 600)
-        {
-            mover.y += speed;
-        }
-        else
-        {
-            mover.y -= speed;
-        }
+        // else if (mover.y == 100 && mover.x <= 950)
+        // {
+        //     mover.x += speed;
+        // }
+        // else if (mover.x >= 320 && mover.y <= 600)
+        // {
+        //     mover.y += speed;
+        // }
+        // else
+        // {
+        //     mover.y -= speed;
+        // }
     }
 }
 

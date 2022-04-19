@@ -39,6 +39,16 @@ int Bhuruz::generateRandomInteger(int min, int max)
 void Bhuruz::drawObjects()
 {
 
+    SDL_FPoint *q;
+    SDL_FPoint pt;
+
+    q = &pt;
+    SDL_FRect *p;
+    SDL_FRect moverRect;
+    p = &moverRect;
+    SDL_Event e;
+
+    SDL_RendererFlip a = SDL_FLIP_NONE;
     // // pig = new Pigeon(0, 0);
     if (gameState == GameState::RUNNING)
     {
@@ -47,15 +57,34 @@ void Bhuruz::drawObjects()
             switch (level)
             {
             case Level::EASY:
-                SDL_RenderCopy(Drawing::gRenderer, Drawing::levelOne, &gameObjects[i]->src, &gameObjects[i]->mover);
+            {
+                pt.x = 900;
+                pt.y = 900;
+                moverRect = {-195, -480, 1800, 1800};
+                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelOne, NULL, p, theta, q, a);
+                break;
+            }
 
-                break;
             case Level::MEDIUM:
-                SDL_RenderCopy(Drawing::gRenderer, Drawing::levelTwo, &gameObjects[i]->src, &gameObjects[i]->mover);
+            {
+                pt.x = 900;
+                pt.y = 900;
+                moverRect = {-195, -480, 1800, 1800};
+                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelTwo, NULL, p, theta, q, a);
                 break;
+            }
+
+                // SDL_RenderCopy(Drawing::gRenderer, Drawing::levelTwo, &gameObjects[i]->src, &gameObjects[i]->mover);
             case Level::HARD:
-                SDL_RenderCopy(Drawing::gRenderer, Drawing::levelThree, &gameObjects[i]->src, &gameObjects[i]->mover);
+            {
+                pt.x = 805;
+                pt.y = 805;
+                moverRect = {0, -400, 1600, 1600};
+                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelThree, NULL, p, theta, q, a);
                 break;
+            }
+
+                // SDL_RenderCopy(Drawing::gRenderer, Drawing::levelThree, &gameObjects[i]->src, &gameObjects[i]->mover);
 
             default:
                 break;
@@ -190,8 +219,8 @@ void Bhuruz::showScreens()
         // ? level background
         ScreenObject *levelBackground = new ScreenObject();
 
-        levelBackground->src = {0, 0, 2560, 1440};
-        levelBackground->mover = {0, 0, 1400, 780};
+        levelBackground->src = {0, 0, 1800, 1800};
+        levelBackground->mover = {0, 0, 1800, 1800};
 
         gameObjects.push_back(levelBackground);
 
@@ -328,6 +357,14 @@ void Bhuruz::makeMove(string direction)
     if (gameState == GameState::RUNNING)
     {
         vehicle->initVehicleMovement(direction);
+        if (direction == "RIGHT")
+        {
+            theta += 10;
+        }
+        else if (direction == "LEFT")
+        {
+            theta -= 10;
+        }
     }
 }
 

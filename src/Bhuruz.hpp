@@ -59,6 +59,7 @@ private:
 
     Vehicle *vehicle;
     bool _levelScreen = 0;
+    double theta = 0;
 
 public:
     void drawObjects();
