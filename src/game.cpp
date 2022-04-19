@@ -143,7 +143,7 @@ void Game::run()
 		while (SDL_PollEvent(&e))
 		{
 			// User requests quit
-			if (e.type == SDL_QUIT)
+			if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 			{
 				quit = true;
 			}

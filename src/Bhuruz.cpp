@@ -90,6 +90,8 @@ void Bhuruz::drawObjects()
                 break;
             }
         }
+
+        /// obstacles
         vehicle->draw();
     }
 

@@ -31,5 +31,5 @@ private:
 public:
     ObjectCreater();
 
-    static Unit *getObject(int, int, int);
+    static Unit *getObject(int);
 };
