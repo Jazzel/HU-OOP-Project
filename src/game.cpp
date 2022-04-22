@@ -153,7 +153,8 @@ void Game::run()
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse, &yMouse);
 				// bhuruz.();
-				bhuruz.createObject(xMouse, yMouse);
+				// bhuruz.createObject(xMouse, yMouse);
+				bhuruz.onClickHandler(xMouse, yMouse);
 			}
 			else
 			{

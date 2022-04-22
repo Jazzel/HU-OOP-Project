@@ -45,7 +45,7 @@ void Bhuruz::drawObjects()
     q = &pt;
     SDL_FRect *p;
     SDL_FRect moverRect;
-    p = &moverRect;
+
     SDL_Event e;
 
     SDL_RendererFlip a = SDL_FLIP_NONE;
@@ -61,6 +61,7 @@ void Bhuruz::drawObjects()
                 pt.x = 900;
                 pt.y = 900;
                 moverRect = {-195, -480, 1800, 1800};
+                p = &moverRect;
                 SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelOne, NULL, p, theta, q, a);
                 break;
             }
@@ -70,21 +71,22 @@ void Bhuruz::drawObjects()
                 pt.x = 900;
                 pt.y = 900;
                 moverRect = {-195, -480, 1800, 1800};
+                p = &moverRect;
+
                 SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelTwo, NULL, p, theta, q, a);
                 break;
             }
 
-                // SDL_RenderCopy(Drawing::gRenderer, Drawing::levelTwo, &gameObjects[i]->src, &gameObjects[i]->mover);
             case Level::HARD:
             {
                 pt.x = 805;
                 pt.y = 805;
                 moverRect = {0, -400, 1600, 1600};
+                p = &moverRect;
+
                 SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelThree, NULL, p, theta, q, a);
                 break;
             }
-
-                // SDL_RenderCopy(Drawing::gRenderer, Drawing::levelThree, &gameObjects[i]->src, &gameObjects[i]->mover);
 
             default:
                 break;
@@ -92,6 +94,48 @@ void Bhuruz::drawObjects()
         }
 
         /// obstacles
+        for (int i = 0; i < obstacleObjects.size(); i++)
+        {
+            pt.x = 10;
+            pt.y = 10;
+            moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
+            p = &moverRect;
+            // SDL_RenderCopyExF(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, p, theta, q, a);
+            if (obstacleObjects[i]->mover.h <= 200)
+            {
+
+                switch (i)
+                {
+                case 0:
+                {
+                    obstacleObjects[i]->mover.y -= 4;
+                    break;
+                }
+                case 1:
+                {
+                    obstacleObjects[i]->mover.x += 4;
+                    obstacleObjects[i]->mover.y += 4;
+                    break;
+                }
+                case 2:
+                {
+                    obstacleObjects[i]->mover.x -= 4;
+                    obstacleObjects[i]->mover.y += 4;
+                    break;
+                }
+
+                default:
+                    break;
+                }
+
+                obstacleObjects[i]->mover.h += 1;
+                obstacleObjects[i]->mover.w += 1;
+            }
+            SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, &obstacleObjects[i]->mover);
+            detectCollision(obstacleObjects[i]->mover.x, obstacleObjects[i]->mover.y, obstacleObjects[i]->mover.w, obstacleObjects[i]->mover.h);
+            // detectCollision(moverRect.x, moverRect.y, moverRect.w, moverRect.h);
+        }
+
         vehicle->draw();
     }
 
@@ -229,6 +273,8 @@ void Bhuruz::showScreens()
         // Todo: score | speed
 
         // Todo: obstacles
+        Obstacles *obstacles = new SquareObstacle();
+        obstacleObjects = obstacles->initObstacles();
 
         // Bhuruz::startGame();
 
@@ -263,6 +309,20 @@ void Bhuruz::showScreens()
     }
 }
 
+void Bhuruz::detectCollision(int x, int y, int w, int h)
+// void Bhuruz::detectCollision(float x, float y, float w, float h)
+{
+    if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y)
+    {
+        cout << "Game over !!";
+        // Todo: health function -  if health is 0 then game Over !
+
+        gameState = GameState::GAME_OVER;
+        Bhuruz::showScreens();
+    }
+    // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
+}
+
 void Bhuruz::startGame()
 {
     // gameState = GameState::GAME_OVER;
@@ -278,6 +338,8 @@ void Bhuruz::startGame()
 
 void Bhuruz::onClickHandler(int x, int y)
 {
+    std::cout << "Mouse clicked at: " << x << " -- " << y << std::endl;
+
     if (gameState == GameState::LEVEL_SELECT)
     {
         if (x > 260 && y > 310 && x < 940 && y < 430)
@@ -303,6 +365,7 @@ void Bhuruz::onClickHandler(int x, int y)
             cout << "Go back clicked !" << endl;
             gameState = GameState::IDLE;
         }
+        Bhuruz::showScreens();
     }
     else if (gameState == GameState::IDLE)
     {
@@ -316,16 +379,17 @@ void Bhuruz::onClickHandler(int x, int y)
             cout << "Credits clicked !" << endl;
             gameState = GameState::CREDITS;
         }
+        Bhuruz::showScreens();
     }
-    else if (gameState == GameState::CREDITS || gameState == GameState::LEVEL_SELECT)
+    else if (gameState == GameState::CREDITS || gameState == GameState::LEVEL_SELECT || gameState == GameState::GAME_OVER)
     {
         if (x > 1000 && y > 690 && x < 1200 && y < 770)
         {
             cout << "Go back clicked !" << endl;
             gameState = GameState::IDLE;
         }
+        Bhuruz::showScreens();
     }
-    Bhuruz::showScreens();
 }
 
 /**
@@ -355,7 +419,6 @@ void Bhuruz::createObject(int x, int y)
 
 void Bhuruz::makeMove(string direction)
 {
-    // Todo: check if vehicle is coming !
     if (gameState == GameState::RUNNING)
     {
         vehicle->initVehicleMovement(direction);

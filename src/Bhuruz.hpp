@@ -1,3 +1,4 @@
+#pragma once
 // ? imports
 #include <SDL.h>
 #include <vector>
@@ -5,12 +6,12 @@
 #include <SDL_image.h>
 
 // ? header files
-#include "unit.hpp"
-#include "ObjectCreater.hpp"
 #include "GameState.hpp"
 #include "Level.hpp"
-#include "Obstacles.hpp"
+#include "SquareObstacle.hpp"
 #include "Vehicle.hpp"
+#include "Asset.hpp"
+
 using namespace std;
 
 /**
@@ -41,18 +42,12 @@ using namespace std;
  *
  */
 
-class Asset
-{
-public:
-    SDL_Rect mover, src;
-};
-
 class Bhuruz
 {
 private:
     vector<ScreenObject *> gameObjects;
     vector<Asset *> screenObjects;
-    vector<Obstacles *> obstaclesObjects;
+    vector<Obstacles *> obstacleObjects;
 
     GameState gameState;
     Level level;
@@ -69,6 +64,8 @@ public:
     void init();
     void onClickHandler(int, int);
     void startGame();
+    // void detectCollision(float, float, float, float);
+    void detectCollision(int, int, int, int);
 
     // void showCreditsScreen();
     // void showStartScreen();

@@ -56,7 +56,7 @@ Vehicle::Vehicle()
     src = {2722, 1334, 488, 252};
     mover = {620, 600, 110, 80};
 
-    speed = 100;
+    speed = 40;
 }
 
 Vehicle::~Vehicle()
