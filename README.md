@@ -2,6 +2,15 @@
 
 ## OOP Project
 
+### Team
+
+-
+-
+-
+-
+
+### Description
+
 Bhuruz is a obstacle tackling survival game in which the player has to tackle obstacles while moving through a
 cylindrical tunnel as a bike type object. The start-end mechanism of the game depends on the health of the player
 which decrements and increments in a few discrete levels and a health bar corresponding to the status of the player’s
@@ -28,3 +37,32 @@ To implement this game as the course project all the techniques of OOP will be a
 objects, abstraction, encapsulation, inheritance and polymorphism. To improve the memory efficiency all/most of
 the objects will be created dynamically. SDL 2.0 graphic library will be used to render the graphics for this game,
 which is necessary to make the game interactive.
+
+### Pre-requisites
+
+- C++ (^20) - [Official Documentation](https://www.cplusplus.com/doc/tutorial/)
+- SDL 2.0 - [Official Documentation](https://www.libsdl.org/)
+
+### Setup
+
+- Compiling all the files:
+
+  `g++ *.cpp -IC:\mingw_dev_lib\include\SDL2 -LC:\mingw_dev_lib\lib -w -lmingw32 -lSDL2main -lSDL2 -lSDL2_image `
+
+- Executing the project:
+
+  `./a.exe`
+
+### Screenshots
+
+#### Home Screen
+
+<img src="./screenshots/Home.png" />
+
+#### Credits Screen
+
+<img src="./screenshots/Credits.png" />
+
+#### Level Screen
+
+<img src="./screenshots/Level.png" />
