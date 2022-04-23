@@ -1,3 +1,8 @@
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
 class Score
 {
 private:
@@ -8,4 +13,6 @@ public:
     ~Score();
 
     int getScore();
+    void incrementScore();
+    void draw();
 };
