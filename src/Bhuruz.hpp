@@ -86,5 +86,6 @@ public:
 
     void showScreens();
 
+    Bhuruz();
     ~Bhuruz();
 };
