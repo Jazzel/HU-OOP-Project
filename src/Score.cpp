@@ -2,7 +2,7 @@
 #include "Asset.hpp"
 #include "drawing.hpp"
 
-Score::Score(/* args */)
+Score::Score()
 {
     score = 0;
 }

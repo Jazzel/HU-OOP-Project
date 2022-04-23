@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL.h>
 #include <string>
 
@@ -13,7 +15,7 @@ class Vehicle : public ScreenObject
 {
 private:
     int speed;
-    //int health;
+    // int health;
 public:
     Vehicle();
     ~Vehicle();

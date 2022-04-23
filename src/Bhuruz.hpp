@@ -8,14 +8,9 @@
 // ? header files
 #include "GameState.hpp"
 #include "Level.hpp"
-#include "SquareObstacle.hpp"
-#include "BombObstacle.hpp"
-#include "HealthObstacle.hpp"
-#include "WallObstacle.hpp"
-#include "Vehicle.hpp"
 #include "Asset.hpp"
 #include "Score.hpp"
-#include "health.hpp"
+#include "Health.hpp"
 
 using namespace std;
 
@@ -60,12 +55,16 @@ private:
 
     Vehicle *vehicle;
     Score *score;
-    Health* gameHealth;
+    Health *gameHealth;
 
     bool _levelScreen = 0;
     double theta = 0;
 
     bool toggle = 1;
+
+    bool collide = 0;
+
+    int counter = 20;
 
 public:
     void drawObjects();
@@ -77,7 +76,7 @@ public:
     void onClickHandler(int, int);
     void startGame();
     // void detectCollision(float, float, float, float);
-    void detectCollision(int, int, int, int);
+    void detectCollision(int, int, int, int, Obstacles *);
     void showScore(int);
 
     // void showCreditsScreen();

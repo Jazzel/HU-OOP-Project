@@ -10,9 +10,15 @@
 
 using namespace std;
 
-class Health: public ScreenObject{
-    int currentHealth = 100;
-    public:
-    void updateHealth(Obstacles obstacle);
+class Health : public ScreenObject
+{
+private:
+    int health = 100;
+
+public:
+    void updateHealth(Obstacles *obstacle);
     void displayHealth();
+    int getHealth();
+
+    Health();
 };

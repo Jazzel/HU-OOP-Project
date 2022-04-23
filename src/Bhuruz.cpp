@@ -102,46 +102,46 @@ void Bhuruz::drawObjects()
             moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
             p = &moverRect;
             // SDL_RenderCopyExF(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, p, theta, q, a);
-            // if (obstacleObjects[i]->mover.h <= 150)
-            // {
+            if (obstacleObjects[i]->mover.h <= 150)
+            {
 
-            //     switch (i)
-            //     {
-            //     case 0:
-            //     {
-            //         obstacleObjects[i]->mover.y -= 4;
-            //         break;
-            //     }
-            //     case 1:
-            //     {
-            //         obstacleObjects[i]->mover.x += 4;
-            //         obstacleObjects[i]->mover.y += 4;
-            //         break;
-            //     }
-            //     case 2:
-            //     {
-            //         obstacleObjects[i]->mover.x -= 4;
-            //         obstacleObjects[i]->mover.y += 4;
-            //         break;
-            //     }
+                switch (i)
+                {
+                case 0:
+                {
+                    obstacleObjects[i]->mover.y -= 4;
+                    break;
+                }
+                case 1:
+                {
+                    obstacleObjects[i]->mover.x += 4;
+                    obstacleObjects[i]->mover.y += 4;
+                    break;
+                }
+                case 2:
+                {
+                    obstacleObjects[i]->mover.x -= 4;
+                    obstacleObjects[i]->mover.y += 4;
+                    break;
+                }
 
-            //     default:
-            //         break;
-            //     }
+                default:
+                    break;
+                }
 
-            //     obstacleObjects[i]->mover.h += 5;
-            //     obstacleObjects[i]->mover.w += 5;
-            // }
-            // else
-            // {
-            //     while (!obstacleObjects.empty())
-            //     {
-            //         obstacleObjects.pop_back();
-            //     }
-            //     toggle = true;
-            // }
+                obstacleObjects[i]->mover.h += 5;
+                obstacleObjects[i]->mover.w += 5;
+            }
+            else
+            {
+                while (!obstacleObjects.empty())
+                {
+                    obstacleObjects.pop_back();
+                }
+                toggle = true;
+            }
             SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, &obstacleObjects[i]->mover);
-            detectCollision(obstacleObjects[i]->mover.x, obstacleObjects[i]->mover.y, obstacleObjects[i]->mover.w, obstacleObjects[i]->mover.h);
+            detectCollision(obstacleObjects[i]->mover.x, obstacleObjects[i]->mover.y, obstacleObjects[i]->mover.w, obstacleObjects[i]->mover.h, obstacleObjects[i]);
             // detectCollision(moverRect.x, moverRect.y, moverRect.w, moverRect.h);
         }
 
@@ -189,6 +189,15 @@ void Bhuruz::drawObjects()
     //     }
     //     ++_iterator;
     // }
+    if (collide)
+    {
+        counter--;
+        if (counter <= 0)
+        {
+            counter = 20;
+            collide = false;
+        }
+    }
 }
 
 Asset *checkNumber(int number)
@@ -248,7 +257,7 @@ void Bhuruz::showScore(int score)
     {
         scoreObjects.pop_back();
     }
-    cout << "Score: " << score << endl;
+    // cout << "Score: " << score << endl;
     int unit = score % 10;
     int ten = (score / 10) % 10;
     int hundred = (score / 100) % 10;
@@ -280,11 +289,9 @@ void Bhuruz::init()
 {
 
     gameState = GameState::IDLE;
-    gameHealth = new Health();
-    score = new Score();
 
     Bhuruz::showScreens();
-    
+
     // Bhuruz::showStartScreen();
 }
 
@@ -376,6 +383,9 @@ void Bhuruz::showScreens()
     case GameState::RUNNING:
     {
 
+        gameHealth = new Health();
+        score = new Score();
+
         obstacleObjects = {};
         // ? vehicle
         vehicle = new Vehicle();
@@ -389,10 +399,6 @@ void Bhuruz::showScreens()
         gameObjects.push_back(levelBackground);
 
         // Todo: score | speed
-
-        // Todo: obstacles
-
-        // Bhuruz::startGame();
 
         break;
     }
@@ -426,16 +432,20 @@ void Bhuruz::showScreens()
     }
 }
 
-void Bhuruz::detectCollision(int x, int y, int w, int h)
+void Bhuruz::detectCollision(int x, int y, int w, int h, Obstacles *obstacle)
 // void Bhuruz::detectCollision(float x, float y, float w, float h)
 {
-    if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y)
+    if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
     {
         cout << "Game over !!";
         // Todo: health function -  if health is 0 then game Over !
-        // gameHealth.updateHealth(obstacle)
-        gameState = GameState::GAME_OVER;
-        Bhuruz::showScreens();
+        gameHealth->updateHealth(obstacle);
+        if (gameHealth->getHealth() <= 0)
+        {
+            gameState = GameState::GAME_OVER;
+            Bhuruz::showScreens();
+        }
+        collide = true;
     }
     // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
 }
