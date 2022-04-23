@@ -171,8 +171,9 @@ void Game::run()
 
 		SDL_RenderClear(Drawing::gRenderer);					  // removes everything from renderer
 		SDL_RenderCopy(Drawing::gRenderer, gTexture, NULL, NULL); // Draws background to renderer
-		//***********************draw the objects here********************
+		//***********************draw & create the objects here********************
 
+		bhuruz.createObstacles();
 		bhuruz.drawObjects();
 
 		//****************************************************************

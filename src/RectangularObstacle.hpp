@@ -5,11 +5,9 @@
 
 using namespace std;
 
-class SquareObstacle : public Obstacles
+class RectangularObstacle : public Obstacles
 {
 private:
 public:
-    SquareObstacle();
-
-    Obstacles *getObstacles() override;
+    RectangularObstacle();
 };

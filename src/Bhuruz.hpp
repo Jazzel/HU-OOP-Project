@@ -9,8 +9,11 @@
 #include "GameState.hpp"
 #include "Level.hpp"
 #include "SquareObstacle.hpp"
+#include "BombObstacle.hpp"
+#include "HealthObstacle.hpp"
 #include "Vehicle.hpp"
 #include "Asset.hpp"
+#include "Score.hpp"
 
 using namespace std;
 
@@ -48,17 +51,23 @@ private:
     vector<ScreenObject *> gameObjects;
     vector<Asset *> screenObjects;
     vector<Obstacles *> obstacleObjects;
+    vector<Asset *> scoreObjects;
 
     GameState gameState;
     Level level;
 
     Vehicle *vehicle;
+    Score *score;
+
     bool _levelScreen = 0;
     double theta = 0;
+
+    bool toggle = 1;
 
 public:
     void drawObjects();
     void createObject(int, int);
+    void createObstacles();
     int generateRandomInteger(int, int);
     void makeMove(string);
     void init();
@@ -66,6 +75,7 @@ public:
     void startGame();
     // void detectCollision(float, float, float, float);
     void detectCollision(int, int, int, int);
+    void showScore(int);
 
     // void showCreditsScreen();
     // void showStartScreen();

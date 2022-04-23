@@ -1,6 +1,11 @@
 #include "Obstacles.hpp"
+#include "SquareObstacle.hpp"
 
 Obstacles::Obstacles(/* args */)
+{
+}
+
+Obstacles::Obstacles(SDL_Rect _srcRect) : src(_srcRect)
 {
 }
 
@@ -14,15 +19,3 @@ Obstacles::~Obstacles()
 
 //     return obstacles;
 // }
-
-void Obstacles::grow()
-{
-    for (int i = 0; i < obstacles.size(); i++)
-    {
-        if (obstacles[i]->mover.x <= 200)
-        {
-            obstacles[i]->mover.x += 10;
-            obstacles[i]->mover.y += 10;
-        }
-    }
-}

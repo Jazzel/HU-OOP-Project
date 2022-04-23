@@ -21,7 +21,7 @@ public:
     Obstacles(SDL_Rect srcRect);
     ~Obstacles();
 
-    virtual vector<Obstacles *> initObstacles() = 0;
+    virtual Obstacles *getObstacles() = 0;
     void grow();
     void draw();
 };

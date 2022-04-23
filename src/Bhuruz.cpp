@@ -52,6 +52,7 @@ void Bhuruz::drawObjects()
     // // pig = new Pigeon(0, 0);
     if (gameState == GameState::RUNNING)
     {
+        // ? level
         for (int i = 0; i < gameObjects.size(); i++)
         {
             switch (level)
@@ -93,7 +94,7 @@ void Bhuruz::drawObjects()
             }
         }
 
-        /// obstacles
+        /// ? obstacles
         for (int i = 0; i < obstacleObjects.size(); i++)
         {
             pt.x = 10;
@@ -101,7 +102,7 @@ void Bhuruz::drawObjects()
             moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
             p = &moverRect;
             // SDL_RenderCopyExF(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, p, theta, q, a);
-            if (obstacleObjects[i]->mover.h <= 200)
+            if (obstacleObjects[i]->mover.h <= 150)
             {
 
                 switch (i)
@@ -128,15 +129,32 @@ void Bhuruz::drawObjects()
                     break;
                 }
 
-                obstacleObjects[i]->mover.h += 1;
-                obstacleObjects[i]->mover.w += 1;
+                obstacleObjects[i]->mover.h += 5;
+                obstacleObjects[i]->mover.w += 5;
+            }
+            else
+            {
+                while (!obstacleObjects.empty())
+                {
+                    obstacleObjects.pop_back();
+                }
+                toggle = true;
             }
             SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, &obstacleObjects[i]->mover);
             detectCollision(obstacleObjects[i]->mover.x, obstacleObjects[i]->mover.y, obstacleObjects[i]->mover.w, obstacleObjects[i]->mover.h);
             // detectCollision(moverRect.x, moverRect.y, moverRect.w, moverRect.h);
         }
 
+        // ? score
+        for (int i = 0; i < scoreObjects.size(); i++)
+        {
+            SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &scoreObjects[i]->src, &scoreObjects[i]->mover);
+        }
+        // ? vehicle
         vehicle->draw();
+
+        // ? score
+        Bhuruz::showScore(score->getScore());
     }
 
     for (int i = 0; i < screenObjects.size(); i++)
@@ -166,6 +184,91 @@ void Bhuruz::drawObjects()
     //     }
     //     ++_iterator;
     // }
+}
+
+Asset *checkNumber(int number)
+{
+    Asset *asset = new Asset();
+
+    switch (number)
+    {
+    case 0:
+        asset->src = {3817, 57, 240, 386};
+        break;
+    case 1:
+        asset->src = {3818, 507, 157, 386};
+        break;
+
+    case 2:
+        asset->src = {3831, 957, 238, 386};
+        break;
+
+    case 3:
+        asset->src = {3814, 1407, 239, 386};
+        break;
+
+    case 4:
+        asset->src = {3809, 1857, 255, 386};
+        break;
+
+    case 5:
+        asset->src = {4224, 57, 236, 386};
+        break;
+
+    case 6:
+        asset->src = {4222, 507, 238, 386};
+        break;
+
+    case 7:
+        asset->src = {4227, 957, 240, 386};
+        break;
+
+    case 8:
+        asset->src = {4218, 1407, 241, 386};
+        break;
+
+    case 9:
+        asset->src = {4221, 1857, 238, 386};
+        break;
+
+    default:
+        break;
+    }
+    return asset;
+}
+
+void Bhuruz::showScore(int score)
+{
+    while (scoreObjects.size())
+    {
+        scoreObjects.pop_back();
+    }
+    cout << "Score: " << score << endl;
+    int unit = score % 10;
+    int ten = (score / 10) % 10;
+    int hundred = (score / 100) % 10;
+    int thousand = (score / 1000) % 10;
+    int tenThousand = (score / 10000);
+
+    Asset *asset = checkNumber(unit);
+    asset->mover = {1300, 10, 70, 110};
+    scoreObjects.push_back(asset);
+
+    Asset *asset1 = checkNumber(ten);
+    asset1->mover = {1240, 10, 70, 110};
+    scoreObjects.push_back(asset1);
+
+    Asset *asset2 = checkNumber(hundred);
+    asset2->mover = {1180, 10, 70, 110};
+    scoreObjects.push_back(asset2);
+
+    Asset *asset3 = checkNumber(thousand);
+    asset3->mover = {1120, 10, 70, 110};
+    scoreObjects.push_back(asset3);
+
+    Asset *asset4 = checkNumber(tenThousand);
+    asset4->mover = {1060, 10, 70, 110};
+    scoreObjects.push_back(asset4);
 }
 
 void Bhuruz::init()
@@ -259,6 +362,7 @@ void Bhuruz::showScreens()
     case GameState::RUNNING:
     {
 
+        obstacleObjects = {};
         // ? vehicle
         vehicle = new Vehicle();
 
@@ -271,10 +375,9 @@ void Bhuruz::showScreens()
         gameObjects.push_back(levelBackground);
 
         // Todo: score | speed
+        score = new Score();
 
         // Todo: obstacles
-        Obstacles *obstacles = new SquareObstacle();
-        obstacleObjects = obstacles->initObstacles();
 
         // Bhuruz::startGame();
 
@@ -287,19 +390,28 @@ void Bhuruz::showScreens()
         gameOverIcon->mover = {330, 200, 743, 221};
         gameOverIcon->src = {1155, 769, 743, 221};
 
-        Asset *score = new Asset();
-        score->mover = {350, 400, 200, 100};
-        score->src = {2367, 1327, 363, 154};
+        Asset *scoreText = new Asset();
+        scoreText->mover = {450, 450, 200, 100};
+        scoreText->src = {2513, 1026, 379, 139};
 
         Asset *goBackButton = new Asset();
         goBackButton->mover = {1000, 690, 200, 80};
         goBackButton->src = {1089, 361, 266, 98};
 
         // Todo: add numbers for score
+        int x = 70;
+        Bhuruz::showScore(score->getScore());
+        cout << "-----------" << scoreObjects.size() << endl;
 
         screenObjects.push_back(gameOverIcon);
-        screenObjects.push_back(score);
+        screenObjects.push_back(scoreText);
         screenObjects.push_back(goBackButton);
+        for (int i = 0; i < scoreObjects.size(); i++)
+        {
+            scoreObjects[i]->mover = {450 + x, 450, 70, 110};
+            screenObjects.push_back(scoreObjects[i]);
+            x += 100;
+        }
 
         break;
     }
@@ -405,6 +517,52 @@ void Bhuruz::onClickHandler(int x, int y)
  * * y co-ordinate of the screen where mouse is clicked
  *
  */
+
+void Bhuruz::createObstacles()
+{
+    if (gameState == GameState::RUNNING)
+    {
+        int random = rand() & 2;
+
+        if (obstacleObjects.size() < 3 && toggle)
+        {
+            obstacleObjects = {};
+            Obstacles *obstacles;
+
+            switch (random)
+            {
+            case 0:
+            {
+                obstacles = new SquareObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles());
+                obstacles = new SquareObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles());
+                obstacles = new SquareObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles());
+                break;
+            }
+            case 1:
+            {
+                obstacles = new BombObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles());
+                break;
+            }
+
+            case 2:
+            {
+                obstacles = new HealthObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles());
+
+                break;
+            }
+
+            default:
+                break;
+            }
+            toggle = false;
+        }
+    }
+}
 
 void Bhuruz::createObject(int x, int y)
 {

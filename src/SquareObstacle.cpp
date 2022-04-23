@@ -1,6 +1,6 @@
 #include "SquareObstacle.hpp"
 
-vector<Obstacles *> SquareObstacle::initObstacles()
+Obstacles *SquareObstacle::getObstacles()
 {
     SquareObstacle *asset = new SquareObstacle();
     asset->src = {55, 63, 292, 291};
@@ -14,11 +14,15 @@ vector<Obstacles *> SquareObstacle::initObstacles()
     asset2->src = {55, 63, 292, 291};
     asset2->mover = {675, 430, 20, 20};
 
-    obstacles.push_back(asset);
-    obstacles.push_back(asset1);
-    obstacles.push_back(asset2);
+    // obstacles.push_back(asset);
+    // obstacles.push_back(asset1);
+    // obstacles.push_back(asset2);
 
     // cout << obstacles.size() << "Square triggered !!" << endl;
 
-    return obstacles;
+    return asset;
+}
+
+SquareObstacle::SquareObstacle()
+{
 }
