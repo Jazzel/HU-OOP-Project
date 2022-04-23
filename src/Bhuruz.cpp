@@ -151,6 +151,7 @@ void Bhuruz::drawObjects()
             SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &scoreObjects[i]->src, &scoreObjects[i]->mover);
         }
         // ? vehicle
+        gameHealth->displayHealth();
         vehicle->draw();
 
         // ? score
@@ -279,10 +280,11 @@ void Bhuruz::init()
 {
 
     gameState = GameState::IDLE;
+    gameHealth = new Health();
     score = new Score();
 
     Bhuruz::showScreens();
-
+    
     // Bhuruz::showStartScreen();
 }
 
@@ -431,7 +433,7 @@ void Bhuruz::detectCollision(int x, int y, int w, int h)
     {
         cout << "Game over !!";
         // Todo: health function -  if health is 0 then game Over !
-
+        // gameHealth.updateHealth(obstacle)
         gameState = GameState::GAME_OVER;
         Bhuruz::showScreens();
     }
