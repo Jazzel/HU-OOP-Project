@@ -27,7 +27,10 @@ void Health::updateHealth(Obstacles *obstacle)
     }
     else if (typeid(*obstacle).name() == typeid(healthbump).name())
     {
-        health += 25;
+        if (health != 100)
+        {
+            health += 25;
+        }
     }
     else
     {

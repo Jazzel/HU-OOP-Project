@@ -13,9 +13,6 @@ Obstacles::~Obstacles()
 {
 }
 
-// vector<Obstacles *> Obstacles::initObstacles()
-// {
-//     cout << obstacles.size() << "Obstacles triggered !!" << endl;
-
-//     return obstacles;
-// }
+void Obstacles::fly()
+{
+}

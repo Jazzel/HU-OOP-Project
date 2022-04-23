@@ -10,5 +10,6 @@ class BombObstacle : public Obstacles
 private:
 public:
     BombObstacle();
-    Obstacles *getObstacles() override;
+    Obstacles *getObstacles(SDL_Rect) override;
+    void fly();
 };

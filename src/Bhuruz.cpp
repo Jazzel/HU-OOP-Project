@@ -95,50 +95,52 @@ void Bhuruz::drawObjects()
         }
 
         /// ? obstacles
+        Bhuruz::createObstacles();
+
+        if (!toggle)
+        {
+            obstacleCounter--;
+            if (obstacleCounter <= 0)
+            {
+                if (level == Level::EASY)
+                {
+                    obstacleCounter = 15;
+                }
+                else if (level == Level::MEDIUM)
+                {
+                    obstacleCounter = 10;
+                }
+                else if (level == Level::HARD)
+                {
+                    obstacleCounter = 8;
+                }
+                toggle = true;
+            }
+        }
+
         for (int i = 0; i < obstacleObjects.size(); i++)
         {
             pt.x = 10;
             pt.y = 10;
             moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
             p = &moverRect;
-            if (obstacleObjects[i]->mover.h <= 150)
+            if (typeid(*obstacleObjects[i]).name() == typeid(SquareObstacle).name())
             {
-
-                switch (i)
-                {
-                case 0:
-                {
-                    obstacleObjects[i]->mover.y -= 4;
-                    break;
-                }
-                case 1:
-                {
-                    obstacleObjects[i]->mover.x += 4;
-                    obstacleObjects[i]->mover.y += 4;
-                    break;
-                }
-                case 2:
-                {
-                    obstacleObjects[i]->mover.x -= 4;
-                    obstacleObjects[i]->mover.y += 4;
-                    break;
-                }
-
-                default:
-                    break;
-                }
-
-                obstacleObjects[i]->mover.h += 5;
-                obstacleObjects[i]->mover.w += 5;
+                ((SquareObstacle *)(obstacleObjects[i]))->fly();
             }
-            else
+            else if (typeid(*obstacleObjects[i]).name() == typeid(BombObstacle).name())
             {
-                while (!obstacleObjects.empty())
-                {
-                    obstacleObjects.pop_back();
-                }
-                toggle = true;
+                ((BombObstacle *)(obstacleObjects[i]))->fly();
             }
+            else if (typeid(*obstacleObjects[i]).name() == typeid(HealthObstacle).name())
+            {
+                ((HealthObstacle *)(obstacleObjects[i]))->fly();
+            }
+            else if (typeid(*obstacleObjects[i]).name() == typeid(WallObstacle).name())
+            {
+                ((WallObstacle *)(obstacleObjects[i]))->fly();
+            }
+
             if (level == Level::HARD)
             {
                 SDL_RenderCopyExF(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, p, theta, q, a);
@@ -176,25 +178,6 @@ void Bhuruz::drawObjects()
         /* code */
     }
 
-    // * used iterator to keep track of the objects in the loop
-    // * also it helps to erase & delete the object pointer
-    // list<Unit *>::iterator _iterator = objects.begin();
-    // while (_iterator != objects.end())
-    // {
-    //     Unit *object = *_iterator;
-    //     object->draw();
-    //     Bee bee;
-    //     if (typeid(*object).name() == typeid(bee).name())
-    //     {
-    //         if (((Bee *)(object))->deleteBee())
-    //         {
-    //             _iterator = objects.erase(_iterator);
-    //             delete object;
-    //             object = NULL;
-    //         }
-    //     }
-    //     ++_iterator;
-    // }
     if (collide)
     {
         counter--;
@@ -202,6 +185,108 @@ void Bhuruz::drawObjects()
         {
             counter = 20;
             collide = false;
+        }
+    }
+}
+
+void Bhuruz::createObstacles()
+{
+    if (gameState == GameState::RUNNING)
+    {
+        int random = generateRandomInteger(1, 4);
+        // int random = 2;
+        int position = generateRandomInteger(650, 680);
+        if (toggle)
+        {
+            Obstacles *obstacles;
+
+            switch (random)
+            {
+            case 1:
+            {
+                int randomSquare = generateRandomInteger(1, 3);
+                // int randomSquare = 4;
+
+                switch (randomSquare)
+                {
+                case 1:
+                {
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({700, 392, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({650, 500, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({750, 500, 20, 20}));
+                    break;
+                }
+                case 2:
+                {
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({700, 500, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({650, 392, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({750, 392, 20, 20}));
+                    break;
+                }
+                case 3:
+                {
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({750, 406, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({650, 460, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({650, 352, 20, 20}));
+                    break;
+                }
+                case 4:
+                {
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({750, 352, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({650, 406, 20, 20}));
+                    obstacles = new SquareObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({750, 460, 20, 20}));
+                    break;
+                }
+
+                default:
+                    break;
+                }
+
+                break;
+            }
+            case 2:
+            {
+                obstacles = new WallObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles({600, 392, 20, 60}));
+                break;
+            }
+
+            case 3:
+            {
+                obstacles = new BombObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles({position, 392, 20, 20}));
+
+                break;
+            }
+            case 4:
+            {
+                if (gameHealth->getHealth() == 100)
+                {
+                    obstacles = new BombObstacle();
+                    obstacleObjects.push_back(obstacles->getObstacles({position, 392, 20, 20}));
+                    break;
+                }
+                obstacles = new HealthObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles({position, 392, 20, 20}));
+                break;
+            }
+
+            default:
+                break;
+            }
+            toggle = false;
         }
     }
 }
@@ -494,18 +579,21 @@ void Bhuruz::onClickHandler(int x, int y)
         if (x > 260 && y > 310 && x < 940 && y < 430)
         {
             cout << "Easy clicked !" << endl;
+            obstacleCounter = 15;
             level = Level::EASY;
             gameState = GameState::RUNNING;
         }
         else if (x > 300 && y > 450 && x < 980 && y < 570)
         {
             cout << "Medium clicked !" << endl;
+            obstacleCounter = 10;
             level = Level::MEDIUM;
             gameState = GameState::RUNNING;
         }
         else if (x > 340 && y > 590 && x < 1020 && y < 710)
         {
             cout << "Hard clicked !" << endl;
+            obstacleCounter = 8;
             level = Level::HARD;
             gameState = GameState::RUNNING;
         }
@@ -554,62 +642,6 @@ void Bhuruz::onClickHandler(int x, int y)
  * * y co-ordinate of the screen where mouse is clicked
  *
  */
-
-void Bhuruz::createObstacles()
-{
-    if (gameState == GameState::RUNNING)
-    {
-        int random = 0;
-
-        if (obstacleObjects.size() < 3 && toggle)
-        {
-            obstacleObjects = {};
-            Obstacles *obstacles;
-
-            switch (random)
-            {
-            case 0:
-            {
-                obstacles = new SquareObstacle();
-                obstacles->mover = {700, 392, 20, 20};
-                obstacleObjects.push_back(obstacles->getObstacles());
-                obstacles = new SquareObstacle();
-                obstacles->mover = {650, 500, 20, 20};
-                obstacleObjects.push_back(obstacles->getObstacles());
-                obstacles = new SquareObstacle();
-                obstacles->mover = {750, 500, 20, 20};
-                obstacleObjects.push_back(obstacles->getObstacles());
-                break;
-            }
-            case 1:
-            {
-                obstacles = new BombObstacle();
-                obstacleObjects.push_back(obstacles->getObstacles());
-                break;
-            }
-
-            case 2:
-            {
-                obstacles = new HealthObstacle();
-                obstacleObjects.push_back(obstacles->getObstacles());
-
-                break;
-            }
-            case 3:
-            {
-                obstacles = new WallObstacle();
-                obstacleObjects.push_back(obstacles->getObstacles());
-
-                break;
-            }
-
-            default:
-                break;
-            }
-            toggle = false;
-        }
-    }
-}
 
 void Bhuruz::createObject(int x, int y)
 {

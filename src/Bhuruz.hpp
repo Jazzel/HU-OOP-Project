@@ -66,6 +66,8 @@ private:
 
     int counter = 20;
 
+    int obstacleCounter = 10;
+
 public:
     void drawObjects();
     void createObject(int, int);

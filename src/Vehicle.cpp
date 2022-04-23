@@ -8,7 +8,7 @@ void Vehicle::initVehicleMovement(string direction)
     // cout << "Direction: " << direction << endl;
     if (direction == "RIGHT")
     {
-        if (mover.y == 600 && mover.x <= 950)
+        if (mover.y == 600 && mover.x <= 930)
         {
             mover.x += speed;
         }
@@ -27,7 +27,7 @@ void Vehicle::initVehicleMovement(string direction)
     }
     else if (direction == "LEFT")
     {
-        if (mover.y == 600 && mover.x >= 320)
+        if (mover.y == 600 && mover.x >= 300)
         {
             mover.x -= speed;
         }
