@@ -3,7 +3,7 @@
 Obstacles *HealthObstacle::getObstacles()
 {
     HealthObstacle *asset = new HealthObstacle();
-    asset->src = {1025, 635, 525, 323};
+    asset->src = {2157, 1182, 317, 318};
 
     // TODO : random pos
 
