@@ -4,10 +4,10 @@
 
 ### Team
 
--
--
--
--
+- Ali Asghar Kerai
+- Areeb Adnan Khan
+- Muhammad Jazzel Mehmood
+- Lakshman Maheshwari
 
 ### Description
 
