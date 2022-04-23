@@ -15,6 +15,7 @@
 #include "Vehicle.hpp"
 #include "Asset.hpp"
 #include "Score.hpp"
+#include "health.hpp"
 
 using namespace std;
 
@@ -59,6 +60,7 @@ private:
 
     Vehicle *vehicle;
     Score *score;
+    Health* gameHealth;
 
     bool _levelScreen = 0;
     double theta = 0;

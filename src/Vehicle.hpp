@@ -13,8 +13,7 @@ class Vehicle : public ScreenObject
 {
 private:
     int speed;
-    int health;
-
+    //int health;
 public:
     Vehicle();
     ~Vehicle();
