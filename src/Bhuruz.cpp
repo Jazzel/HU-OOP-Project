@@ -486,7 +486,7 @@ void Bhuruz::showScreens()
         vehicle = new Vehicle();
 
         // ? level background
-        ScreenObject *levelBackground = new ScreenObject();
+        Asset *levelBackground = new Asset();
 
         levelBackground->src = {0, 0, 1800, 1800};
         levelBackground->mover = {0, 0, 1800, 1800};
@@ -518,6 +518,9 @@ void Bhuruz::showScreens()
         screenObjects.push_back(gameOverIcon);
         screenObjects.push_back(scoreText);
         screenObjects.push_back(goBackButton);
+        Mix_PauseMusic();
+
+        Mix_PlayChannel(-1, Drawing::gGameOver, 0);
 
         break;
     }
