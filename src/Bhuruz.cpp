@@ -522,7 +522,7 @@ void Bhuruz::createObstacles()
 {
     if (gameState == GameState::RUNNING)
     {
-        int random = rand() & 2;
+        int random = rand() & 3;
 
         if (obstacleObjects.size() < 3 && toggle)
         {
@@ -551,6 +551,13 @@ void Bhuruz::createObstacles()
             case 2:
             {
                 obstacles = new HealthObstacle();
+                obstacleObjects.push_back(obstacles->getObstacles());
+
+                break;
+            }
+            case 3:
+            {
+                obstacles = new WallObstacle();
                 obstacleObjects.push_back(obstacles->getObstacles());
 
                 break;

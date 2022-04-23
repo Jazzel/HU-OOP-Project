@@ -11,6 +11,7 @@
 #include "SquareObstacle.hpp"
 #include "BombObstacle.hpp"
 #include "HealthObstacle.hpp"
+#include "WallObstacle.hpp"
 #include "Vehicle.hpp"
 #include "Asset.hpp"
 #include "Score.hpp"
