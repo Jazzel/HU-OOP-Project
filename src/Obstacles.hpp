@@ -21,6 +21,7 @@ public:
     Obstacles(SDL_Rect srcRect);
     ~Obstacles();
 
+    bool deleteObjects();
     virtual Obstacles *getObstacles(SDL_Rect) = 0;
     void fly();
     void draw();

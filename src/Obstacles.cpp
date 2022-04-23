@@ -16,3 +16,12 @@ Obstacles::~Obstacles()
 void Obstacles::fly()
 {
 }
+
+bool Obstacles::deleteObjects()
+{
+    if (mover.h > 1500)
+    {
+        return true;
+    }
+    return false;
+}

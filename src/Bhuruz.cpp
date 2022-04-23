@@ -120,6 +120,7 @@ void Bhuruz::drawObjects()
 
         for (int i = 0; i < obstacleObjects.size(); i++)
         {
+
             pt.x = 10;
             pt.y = 10;
             moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
@@ -150,6 +151,10 @@ void Bhuruz::drawObjects()
             {
                 SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, &obstacleObjects[i]->mover);
                 detectCollision(obstacleObjects[i]->mover.x, obstacleObjects[i]->mover.y, obstacleObjects[i]->mover.w, obstacleObjects[i]->mover.h, obstacleObjects[i]);
+            }
+            if (obstacleObjects[i]->deleteObjects())
+            {
+                obstacleObjects.erase(obstacleObjects.begin() + i);
             }
         }
 
