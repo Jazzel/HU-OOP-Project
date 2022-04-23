@@ -61,8 +61,6 @@ void Health::displayHealth()
     SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &src, &mover);
 }
 
-int Health::getHealth() { return health; }
-
 Health::Health()
 {
     health = 100;

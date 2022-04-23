@@ -18,7 +18,7 @@ private:
 public:
     void updateHealth(Obstacles *obstacle);
     void displayHealth();
-    int getHealth();
+    inline int getHealth() { return health; }
 
     Health();
 };

@@ -75,8 +75,9 @@ public:
     void init();
     void onClickHandler(int, int);
     void startGame();
-    // void detectCollision(float, float, float, float);
     void detectCollision(int, int, int, int, Obstacles *);
+    void detectCollision(float, float, float, float, Obstacles *);
+    // void detectCollision(int, int, int, int, Obstacles *);
     void showScore(int);
 
     // void showCreditsScreen();
