@@ -15,7 +15,7 @@ Obstacles::~Obstacles()
 
 void Obstacles::fly()
 {
-}
+}   // yes fly object 
 
 bool Obstacles::deleteObjects()
 {
