@@ -452,7 +452,8 @@ void Bhuruz::init()
  *
  * * if game state is GAME OVER, then score, game over title and ho back button are created
  * * they are displayed on the screen by adding them to the screen object vector
- * * music is stopped
+ * * all previous music (bg music) is stopped
+ * * specific sound effect is played
  */
 void Bhuruz::showScreens()
 {

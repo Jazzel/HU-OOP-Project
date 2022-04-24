@@ -3,12 +3,14 @@
 using namespace std;
 
 /**
- * ?brief updateHealth() 
+ * ?brief updateHealth()
  * * function used to update the health integer in the object of the Health type
- * 
+ * * each sound is played depending on the status of health
+ *
  * @param obstacle
- * 
- * * uses typeid().name() to compare the obstacle with a dummy obstacle of each type and changes the health accordingly 
+ *
+ * * uses typeid().name() to compare the obstacle with a dummy obstacle of each type and changes the health accordingly
+ * * using Mix_playChannel command, specific sound effects are played for crash, explode (bomb) and gaining health
  */
 
 void Health::updateHealth(Obstacles *obstacle)
@@ -47,9 +49,10 @@ void Health::updateHealth(Obstacles *obstacle)
     }
 }
 /**
- * ?brief displayHealth() 
+ * ?brief displayHealth()
  * * function used to display the health bars
- * * compares the health integer with the pre-set discrete levels of health and displays the health bars according to the current level of health.
+ * * compares the health integer with the pre-set discrete levels of health
+ * * displays the health bars according to the current level of health.
  */
 void Health::displayHealth()
 {
@@ -76,7 +79,10 @@ void Health::displayHealth()
     }
     SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &src, &mover);
 }
-
+/**
+ * ?brief Health()
+ * * empty constructor, which sets the default value of health attribute as 100
+ */
 Health::Health()
 {
     health = 100;

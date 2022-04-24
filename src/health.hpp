@@ -1,7 +1,9 @@
 #pragma once
+//? imports
 #include <iostream>
 #include <SDL.h>
 #include <SDL_mixer.h>
+//? header files
 #include "Asset.hpp"
 #include "SquareObstacle.hpp"
 #include "WallObstacle.hpp"
