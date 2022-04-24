@@ -1,10 +1,15 @@
 #include "health.hpp"
 #include <iostream>
-
-//#include "drawing.hpp"
 using namespace std;
 
-// Drawing::gameAssets = loadTexture("assets/game-assets.png");
+/**
+ * ?brief updateHealth() 
+ * * function used to update the health integer in the object of the Health type
+ * 
+ * @param obstacle
+ * 
+ * * uses typeid().name() to compare the obstacle with a dummy obstacle of each type and changes the health accordingly 
+ */
 
 void Health::updateHealth(Obstacles *obstacle)
 {
@@ -41,7 +46,11 @@ void Health::updateHealth(Obstacles *obstacle)
         health -= 25;
     }
 }
-
+/**
+ * ?brief displayHealth() 
+ * * function used to display the health bars
+ * * compares the health integer with the pre-set discrete levels of health and displays the health bars according to the current level of health.
+ */
 void Health::displayHealth()
 {
     SDL_Rect src, mover;
