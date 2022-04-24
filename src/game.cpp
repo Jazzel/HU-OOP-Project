@@ -1,3 +1,4 @@
+// ? header files
 #include "game.hpp"
 #include "Bhuruz.hpp"
 #include "drawing.hpp"
@@ -18,6 +19,18 @@ Mix_Chunk *Drawing::gCrash = NULL;
 Mix_Chunk *Drawing::gExplode = NULL;
 Mix_Chunk *Drawing::gGameOver = NULL;
 
+/**
+ * ? @brief init()
+ * * dynamically creates a bomb obstacle using polymorphism
+ * * defines the assets's src rect and assigns mover
+ *
+ * ? @param
+ *
+ * * SDL_RECT - mover, where the object has to be created
+ *
+ * ! return
+ * * obstacles * - a pointing reference to obstacle which is created
+ */
 bool Game::init()
 {
 	// Initialization flag

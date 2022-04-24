@@ -7,17 +7,34 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+/**
+ * ? @brief Game
+ * * the main game class, which defines the functionality of the game
+ *
+ * ? @attributes
+ * * SCREEN WIDTH - int const, defining width of screen
+ * * SCREEN HEIGHT - int const, defining height of screen
+ * * gWindow- SDL_Window*, The window we'll be rendering to
+ * * gTexture - SDL Texture * , Current displayed texture
+ *
+ * ? @functions
+ * * BombObstacle()
+ * *    - empty constructor which initializes the obstacle
+ * * getObstacles(SDL_Rect)
+ * *    - returns an pointing refernce to obstacle
+ * *    - this function is override hence ploymorphism is used here for obstacle creation
+ * * fly()
+ * *    - it defines the path of the obstacle
+ * *    - how the obstacle will draw away from center and move out of the screen
+ */
 
 class Game
 {
-    // Screen dimension constants
     const int SCREEN_WIDTH = 1400;
     const int SCREEN_HEIGHT = 780;
 
-    // The window we'll be rendering to
     SDL_Window *gWindow = NULL;
 
-    // Current displayed texture
     SDL_Texture *gTexture = NULL;
 
 public:

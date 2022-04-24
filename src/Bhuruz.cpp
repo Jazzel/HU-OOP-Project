@@ -10,7 +10,7 @@
 // ! *******************************************************
 
 /**
- * ? brief generateRandomInteger
+ * ? @brief generateRandomInteger
  * * gives random number according to range given
  *
  * ? @param min
@@ -452,6 +452,7 @@ void Bhuruz::init()
  *
  * * if game state is GAME OVER, then score, game over title and ho back button are created
  * * they are displayed on the screen by adding them to the screen object vector
+ * * music is stopped
  */
 void Bhuruz::showScreens()
 {
