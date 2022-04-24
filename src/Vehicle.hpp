@@ -3,15 +3,10 @@
 #include <SDL.h>
 #include <string>
 
+#include "Asset.hpp"
 #include "drawing.hpp"
 
-class ScreenObject
-{
-public:
-    SDL_Rect src, mover;
-};
-
-class Vehicle : public ScreenObject
+class Vehicle : public Asset
 {
 private:
     int speed;
