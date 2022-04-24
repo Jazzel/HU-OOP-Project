@@ -8,14 +8,10 @@
 // ? header files
 #include "GameState.hpp"
 #include "Level.hpp"
-#include "SquareObstacle.hpp"
-#include "BombObstacle.hpp"
-#include "HealthObstacle.hpp"
-#include "WallObstacle.hpp"
-#include "Vehicle.hpp"
 #include "Asset.hpp"
 #include "Score.hpp"
-#include "health.hpp"
+#include "Health.hpp"
+#include "Vehicle.hpp"
 
 using namespace std;
 
@@ -50,7 +46,7 @@ using namespace std;
 class Bhuruz
 {
 private:
-    vector<ScreenObject *> gameObjects;
+    vector<Asset *> gameObjects;
     vector<Asset *> screenObjects;
     vector<Obstacles *> obstacleObjects;
     vector<Asset *> scoreObjects;
@@ -60,12 +56,18 @@ private:
 
     Vehicle *vehicle;
     Score *score;
-    Health* gameHealth;
+    Health *gameHealth;
 
     bool _levelScreen = 0;
     double theta = 0;
 
     bool toggle = 1;
+
+    bool collide = 0;
+
+    int counter = 1;
+
+    int obstacleCounter = 10;
 
 public:
     void drawObjects();
@@ -76,8 +78,9 @@ public:
     void init();
     void onClickHandler(int, int);
     void startGame();
-    // void detectCollision(float, float, float, float);
-    void detectCollision(int, int, int, int);
+    void detectCollision(int, int, int, int, Obstacles *);
+    void detectCollision(float, float, float, float, Obstacles *);
+    // void detectCollision(int, int, int, int, Obstacles *);
     void showScore(int);
 
     // void showCreditsScreen();

@@ -10,5 +10,6 @@ class HealthObstacle : public Obstacles
 private:
 public:
     HealthObstacle();
-    Obstacles *getObstacles() override;
+    Obstacles *getObstacles(SDL_Rect) override;
+    void fly();
 };

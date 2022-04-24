@@ -13,9 +13,15 @@ Obstacles::~Obstacles()
 {
 }
 
-// vector<Obstacles *> Obstacles::initObstacles()
-// {
-//     cout << obstacles.size() << "Obstacles triggered !!" << endl;
+void Obstacles::fly()
+{
+}   // yes fly object 
 
-//     return obstacles;
-// }
+bool Obstacles::deleteObjects()
+{
+    if (mover.h > 1500)
+    {
+        return true;
+    }
+    return false;
+}

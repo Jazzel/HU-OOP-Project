@@ -1,18 +1,26 @@
 #pragma once
 #include <iostream>
 #include <SDL.h>
-#include "Vehicle.hpp"
+#include <SDL_mixer.h>
+#include "Asset.hpp"
 #include "SquareObstacle.hpp"
 #include "WallObstacle.hpp"
 #include "BombObstacle.hpp"
+#include "drawing.hpp"
 #include "HealthObstacle.hpp"
 //#include "drawing.hpp"
 
 using namespace std;
 
-class Health: public ScreenObject{
-    int currentHealth = 100;
-    public:
-    void updateHealth(Obstacles obstacle);
+class Health : public Asset
+{
+private:
+    int health = 100;
+
+public:
+    void updateHealth(Obstacles *obstacle);
     void displayHealth();
+    inline int getHealth() { return health; }
+
+    Health();
 };

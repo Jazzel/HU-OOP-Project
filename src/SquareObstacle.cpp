@@ -1,26 +1,67 @@
 #include "SquareObstacle.hpp"
 
-Obstacles *SquareObstacle::getObstacles()
+Obstacles *SquareObstacle::getObstacles(SDL_Rect mover)
 {
     SquareObstacle *asset = new SquareObstacle();
     asset->src = {55, 63, 292, 291};
-    asset->mover = {695, 400, 20, 20};
-
-    SquareObstacle *asset1 = new SquareObstacle();
-    asset1->src = {55, 63, 292, 291};
-    asset1->mover = {715, 430, 20, 20};
-
-    SquareObstacle *asset2 = new SquareObstacle();
-    asset2->src = {55, 63, 292, 291};
-    asset2->mover = {675, 430, 20, 20};
-
-    // obstacles.push_back(asset);
-    // obstacles.push_back(asset1);
-    // obstacles.push_back(asset2);
-
-    // cout << obstacles.size() << "Square triggered !!" << endl;
+    asset->mover = mover;
 
     return asset;
+}
+
+void SquareObstacle::fly()
+{
+    if (mover.y <= 400 && mover.x == 700)
+    {
+        mover.y -= 10;
+    }
+    else if (mover.y >= 500 && mover.x == 700)
+    {
+        mover.y += 10;
+    }
+    else if (mover.x <= 650 && mover.y >= 500)
+    {
+        mover.x -= 10;
+        mover.y += 10;
+    }
+    else if (mover.x >= 700 && mover.y >= 500)
+    {
+        mover.x += 10;
+        mover.y += 10;
+    }
+    else if (mover.x <= 650 && mover.y <= 392)
+    {
+        mover.x -= 10;
+        mover.y -= 10;
+    }
+    else if (mover.x >= 700 && mover.y <= 392)
+    {
+        mover.x += 10;
+        mover.y -= 10;
+    }
+    else if (mover.x <= 650)
+    {
+        mover.x -= 10;
+        mover.y += 10;
+    }
+    else if (mover.x >= 650)
+    {
+        mover.x += 10;
+        mover.y += 10;
+    }
+
+    mover.h += 5;
+    mover.w += 5;
+    // SquareObstacle obstacles = new SquareObstacle();
+    // obstacles->mover = {700, 392, 20, 20};
+    // obstacleObjects.push_back(obstacles->getObstacles());
+    // SquareObstacle obstacles = new SquareObstacle();
+    // obstacles = new SquareObstacle();
+    // obstacles->mover = {650, 500, 20, 20};
+    // obstacleObjects.push_back(obstacles->getObstacles());
+    // SquareObstacle obstacles = new SquareObstacle();
+    // obstacles->mover = {750, 500, 20, 20};
+    // obstacleObjects.push_back(obstacles->getObstacles());
 }
 
 SquareObstacle::SquareObstacle()
