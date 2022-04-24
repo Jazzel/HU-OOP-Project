@@ -5,7 +5,6 @@
 SDL_Renderer *Drawing::gRenderer = NULL;
 SDL_Texture *Drawing::startAssets = NULL;
 SDL_Texture *Drawing::gameAssets = NULL;
-SDL_Texture *Drawing::assets = NULL;
 SDL_Texture *Drawing::levelOne = NULL;
 SDL_Texture *Drawing::levelTwo = NULL;
 SDL_Texture *Drawing::levelThree = NULL;
@@ -86,7 +85,6 @@ bool Game::loadMedia()
 
 	Drawing::startAssets = loadTexture("assets/start-assets.png");
 	Drawing::gameAssets = loadTexture("assets/game-assets.png");
-	Drawing::assets = loadTexture("assets.png");
 
 	Drawing::levelOne = loadTexture("assets/level1.png");
 	Drawing::levelTwo = loadTexture("assets/level2.png");
@@ -103,7 +101,7 @@ bool Game::loadMedia()
 	Drawing::gExplode = Mix_LoadWAV("sounds/explode.wav");
 	Drawing::gGameOver = Mix_LoadWAV("sounds/gameOver.wav");
 
-	if (Drawing::startAssets == NULL || Drawing::assets == NULL || gTexture == NULL || gMusic == NULL || Drawing::gCrash == NULL || Drawing::gHealth == NULL || Drawing::gExplode == NULL || Drawing::gGameOver == NULL)
+	if (Drawing::startAssets == NULL || gTexture == NULL || gMusic == NULL || Drawing::gCrash == NULL || Drawing::gHealth == NULL || Drawing::gExplode == NULL || Drawing::gGameOver == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
 		success = false;
@@ -114,8 +112,20 @@ bool Game::loadMedia()
 void Game::close()
 {
 	// Free loaded images
-	SDL_DestroyTexture(Drawing::assets);
-	Drawing::assets = NULL;
+	SDL_DestroyTexture(Drawing::startAssets);
+	Drawing::startAssets = NULL;
+
+	SDL_DestroyTexture(Drawing::gameAssets);
+	Drawing::gameAssets = NULL;
+
+	SDL_DestroyTexture(Drawing::levelOne);
+	Drawing::levelOne = NULL;
+
+	SDL_DestroyTexture(Drawing::levelTwo);
+	Drawing::levelTwo = NULL;
+
+	SDL_DestroyTexture(Drawing::levelThree);
+	Drawing::levelThree = NULL;
 	SDL_DestroyTexture(gTexture);
 
 	// Free the sound effects
