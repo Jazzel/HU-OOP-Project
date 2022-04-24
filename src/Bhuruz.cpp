@@ -178,7 +178,6 @@ void Bhuruz::drawObjects()
 
     for (int i = 0; i < screenObjects.size(); i++)
     {
-        // ass[i]->draw();
         SDL_RenderCopy(Drawing::gRenderer, Drawing::startAssets, &screenObjects[i]->src, &screenObjects[i]->mover);
         /* code */
     }
