@@ -29,11 +29,24 @@ int Bhuruz::generateRandomInteger(int min, int max)
 
 /**
  * ? @brief drawObjects()
- * * loops the list of objects
- * * and call very looped variable's (Unit *) draw function.
+ * * iterating over the gameObjects array which consist of pointing reference to assets
+ * * using switch cases level is selected and drawn on canvas
+ * * the background of level is rotated when vehicle is moved
  *
- * * also when bee has passed the screen it deletes the pointing object
- * * and pops it from the list with the help of "deleteBee" helper from the class
+ * * calling the function for creating object
+ * * checking the game level using Level class and setting unique counter value for each level
+ * * using a counter for creating object, once the counter reaches zero new obstacle is created
+ *
+ * * iterating over obstacles object which consist of pointing reference to obstacles
+ * * for medium and easy level obstacles are created and drawn out from the cenetr of the screen
+ * * if the level is hard then obstacles are rotated too
+ * * function detect collision is called which takes the moverRect and obstacle type as arguement
+ * * if the function is drawn out of the screen then it is deleted
+ *
+ * * the vehicle is drawn
+ * * health is displayed on th screen
+ * * score is calculated and displayed on the screen
+ * * all assets in screen object are vector are drawn
  *
  */
 void Bhuruz::drawObjects()
@@ -49,7 +62,6 @@ void Bhuruz::drawObjects()
     SDL_Event e;
 
     SDL_RendererFlip a = SDL_FLIP_NONE;
-    // // pig = new Pigeon(0, 0);
     if (gameState == GameState::RUNNING)
     {
         // ? level
@@ -178,6 +190,29 @@ void Bhuruz::drawObjects()
     }
 }
 
+/**
+ * ? @brief createObstacles()
+ * * a random number is selected with the help of generate Random integer function
+ * * using switch statements and polymorphism obstacles are created
+ *
+ * * for case 1 square obstacles are created, again random integer function is called
+ * * there are 4 patterns for square object's mover Rect
+ * * the obstcles is then pushed in the obstacles object vector which contains pointing reference to obstacle
+ *
+ * * for case 2, wall obstacle is created and its mover Rect is defined
+ * * it is pushed into the obstacle objects vector
+ *
+ * * a position integer is generated using random function
+ * * then using position the path of bomb and health is decided
+ *
+ * * for case 3. a bomb obstacle is created and is pushed in obstacles object vector
+ *
+ * * for case 4, first a bomb obstacle is created if the health is maximum
+ * * then on same path health obstacle is created of smaller size
+ * * health obstacle is then pushed into obstacles object vector
+ *
+ * * toggle, a boolean variable is changed so that new obstacle can be created
+ */
 void Bhuruz::createObstacles()
 {
     if (gameState == GameState::RUNNING)
@@ -193,7 +228,7 @@ void Bhuruz::createObstacles()
             {
             case 1:
             {
-                int randomSquare = generateRandomInteger(1, 3);
+                int randomSquare = generateRandomInteger(1, 4);
                 // int randomSquare = 4;
 
                 switch (randomSquare)
@@ -279,7 +314,16 @@ void Bhuruz::createObstacles()
         }
     }
 }
-
+/**
+ * ? @brief checkNumber()
+ * * a pointing reference to asset is created
+ * * using the number given as arguement through switch statements the src of asset is defined
+ * ? @param number
+ * * - int- a number which has to be displayed
+ * ! return Asset*
+ * * a pointing reference of asset containing src Rect of number to be displayed
+ *
+ */
 Asset *checkNumber(int number)
 {
     Asset *asset = new Asset();
@@ -330,7 +374,18 @@ Asset *checkNumber(int number)
     }
     return asset;
 }
-
+/**
+ * ? @brief showScore()
+ * * each element from score Objects vector conatining pointing refernce of assets displaying score is removed
+ * * using score given as arguemnet, 5 numbers are generated
+ * * pointing refernce to asset is created
+ * * and it checks the number extracted above using defined function and defines its src
+ * * mover rect of each 5 scoring digits is defined
+ * * all assets are added in score objects vector
+ *
+ * ? @param score
+ * * int - a number which has to be displayed on screen
+ */
 void Bhuruz::showScore(int score)
 {
     while (scoreObjects.size())
@@ -364,7 +419,11 @@ void Bhuruz::showScore(int score)
     asset4->mover = {1060, 10, 70, 110};
     scoreObjects.push_back(asset4);
 }
-
+/**
+ * ? @brief init()
+ * * the game state is declared IDLE using gameState class
+ * * show screen function is called to display the screen
+ */
 void Bhuruz::init()
 {
 
@@ -374,7 +433,26 @@ void Bhuruz::init()
 
     // Bhuruz::showStartScreen();
 }
-
+/**
+ * ? @brief showScreens()
+ * * All vectors having pointing reference are initialized
+ * * checking game state using switch statement
+ * * if game state is IDLE, create object that are start button, credits button and game Icon
+ * * and are added to screen objects vector so that they can be diaplyed
+ *
+ * * if game state is CREDITS, the credit screen is displayed as pointing refernces are created and added to screen objects vector
+ * * game icon, credits and go back button are created and displayed
+ *
+ * * if game state is LEVEL_SELECT, the level selection screen is displayed
+ * * as pointing refernces are created and added to screen objects vector
+ * * game icon, back button and three levels conatiner are created
+ *
+ * * check if game state is RUNNING, dynamic score, vehicle, assets and background assets pointer is created
+ * *  src and mover of level background is defined and are pushed into gameObjects vector
+ *
+ * * if game state is GAME OVER, then score, game over title and ho back button are created
+ * * they are displayed on the screen by adding them to the screen object vector
+ */
 void Bhuruz::showScreens()
 {
     gameObjects = {};
@@ -485,9 +563,7 @@ void Bhuruz::showScreens()
 
     case GameState::GAME_OVER:
     {
-        // int x = 70;
-        // int _score = score->getScore();
-        // cout << "-----------" << scoreObjects.size() << endl;
+
         Asset *gameOverIcon = new Asset();
         gameOverIcon->mover = {330, 200, 743, 221};
         gameOverIcon->src = {1155, 769, 743, 221};
@@ -514,7 +590,27 @@ void Bhuruz::showScreens()
         break;
     }
 }
-
+/**
+ * ? @brief detectCollision()
+ * * using vehicles's mover rect and integers arguements given checking whether ther is a collison or not
+ * * in case of collision;s gameHealth class function update health is called and collide boolean variable is updated
+ * * if health of vehicle is less than 0, update game state to game over and call show screen function
+ *
+ * ? @param x
+ * * int - x co-ordinate of the object ( top right )
+ *
+ * ? @param y
+ * * int - y co-ordinate of the object ( top right )
+ *
+ * ? @param h
+ * * int - height of the object
+ *
+ * ? @param w
+ * * int - width of the object
+ *
+ * ? @param obstacles*
+ * * *obstacles- a pointing refernce to the obstacles for which collision is being checked
+ */
 void Bhuruz::detectCollision(int x, int y, int w, int h, Obstacles *obstacle)
 {
     if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
@@ -529,9 +625,28 @@ void Bhuruz::detectCollision(int x, int y, int w, int h, Obstacles *obstacle)
         }
         collide = true;
     }
-    // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
 }
-
+/**
+ * ? @brief detectCollision() function overloading
+ * * using vehicles's mover rect and integers arguements given checking whether ther is a collison or not
+ * * in case of collision;s gameHealth class function update health is called and collide boolean variable is updated
+ * * if health of vehicle is less than 0, update game state to game over and call show screen function
+ *
+ * ? @param x
+ * * float - x co-ordinate of the object ( top right )
+ *
+ * ? @param y
+ * * float  - y co-ordinate of the object ( top right )
+ *
+ * ? @param h
+ * * float  - height of the object
+ *
+ * ? @param w
+ * * float  - width of the object
+ *
+ * ? @param obstacles*
+ * * *obstacles- a pointing refernce to the obstacles for which collision is being checked
+ */
 void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obstacle)
 {
     if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
@@ -546,14 +661,19 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
         }
         collide = true;
     }
-    // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
 }
 
 /**
- * ? @brief createObject()
- * * takes x and y pixels of screen and creates objects on the screen
- * * calls ObjectCreater::getObject function to get object pointer of Unit class
- * * which containes reference to Bee, Butterfly or Pigeon class
+ * ? @brief onClickHandler()
+ * * takes x and y pixels of screen and checks the game State
+ * * if the Game State is level select, then the coordinates are used to check if the button has been clicked or not
+ * * the level has been updated and obstacle counter is assigned uniquely, and game State changes to Running
+ *
+ * * all screen's except IDLE game state has back button, which updates the game state to IDLE state
+ *
+ * * IDLE state has 2 buttons, start and credits button which update game state to level select and credits respectively
+ *
+ * * all screens are diaplyed using show screens function
  *
  * ? @param x
  * * x co-ordinate of the screen where mouse is clicked
@@ -621,7 +741,13 @@ void Bhuruz::onClickHandler(int x, int y)
         Bhuruz::showScreens();
     }
 }
-
+/**
+ * ? @brief makeMove()
+ * * takes a string arguement and checks whther game state is running or not using gameState class
+ * * vehicle's function for movement is called
+ * * using the string direction theta is incremented or decremented
+ * * theta is used to rotate the background canvas diaplying the level
+ */
 void Bhuruz::makeMove(string direction)
 {
     if (gameState == GameState::RUNNING)
@@ -637,7 +763,11 @@ void Bhuruz::makeMove(string direction)
         }
     }
 }
-
+/**
+ * ? @brief Bhuruz()
+ * * an empty constructor, which initializes all vector
+ * * sets boolean variable toggle to true and theta to zero
+ */
 Bhuruz::Bhuruz()
 {
     gameObjects = {};
