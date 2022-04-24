@@ -2,6 +2,8 @@
 
 ## OOP Project
 
+### [GitHub Repository](https://github.com/Jazzel/HU-OOP-Project)
+
 ### Team
 
 - Ali Asghar Kerai
@@ -38,10 +40,12 @@ objects, abstraction, encapsulation, inheritance and polymorphism. To improve th
 the objects will be created dynamically. SDL 2.0 graphic library will be used to render the graphics for this game,
 which is necessary to make the game interactive.
 
-### Pre-requisites
+### Environment
 
 - C++ (^20) - [Official Documentation](https://www.cplusplus.com/doc/tutorial/)
 - SDL 2.0 - [Official Documentation](https://www.libsdl.org/)
+- SDL_image - [Official Documentation](https://www.libsdl.org/projects/SDL_image/)
+- SDL_mixer - [Official Documentation](https://www.libsdl.org/projects/SDL_mixer/)
 
 ### Setup
 
@@ -52,6 +56,37 @@ which is necessary to make the game interactive.
 - Executing the project:
 
   `./a.exe`
+
+### Assets
+
+- `./src/assets` : backgrounds and objects drawings.
+- `./src/sounds` : background and events music.
+
+### How to play
+
+The games uses the mouse to navigate between levels/screens and `←` `→` `a` and `d` keys for the movement of vehicle.
+
+- `←` and `a` keys moves the vehicle to the left.
+- `→` and `d` keys moves the vehicle to the right.
+
+During the game the obstacles will appear in random paths and user have to dodge them to survive.
+
+There are 3 levels for this game.
+
+#### Easy
+
+<img src="./screenshots/Easy.png" />
+At this level the obstacles will appear with slow speed.
+
+#### Medium
+
+<img src="./screenshots/Medium.png" />
+At this level the obstacles will appear with moderate speed.
+
+#### Hard
+
+<img src="./screenshots/Hard.png" />
+At this level the obstacles will appear with the fastest speed. They also rotate with the movement of vehicle.
 
 ### Screenshots
 
