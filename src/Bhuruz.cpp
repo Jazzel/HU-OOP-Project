@@ -125,22 +125,7 @@ void Bhuruz::drawObjects()
             pt.y = 10;
             moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
             p = &moverRect;
-            if (typeid(*obstacleObjects[i]).name() == typeid(SquareObstacle).name())
-            {
-                ((SquareObstacle *)(obstacleObjects[i]))->fly();
-            }
-            else if (typeid(*obstacleObjects[i]).name() == typeid(BombObstacle).name())
-            {
-                ((BombObstacle *)(obstacleObjects[i]))->fly();
-            }
-            else if (typeid(*obstacleObjects[i]).name() == typeid(HealthObstacle).name())
-            {
-                ((HealthObstacle *)(obstacleObjects[i]))->fly();
-            }
-            else if (typeid(*obstacleObjects[i]).name() == typeid(WallObstacle).name())
-            {
-                ((WallObstacle *)(obstacleObjects[i]))->fly();
-            }
+            obstacleObjects[i]->fly();
 
             if (level == Level::HARD)
             {

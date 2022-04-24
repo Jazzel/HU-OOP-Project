@@ -23,6 +23,6 @@ public:
 
     bool deleteObjects();
     virtual Obstacles *getObstacles(SDL_Rect) = 0;
-    void fly();
+    virtual void fly();
     void draw();
 };

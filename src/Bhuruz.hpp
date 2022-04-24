@@ -65,7 +65,7 @@ private:
 
     bool collide = 0;
 
-    int counter = 1;
+    int counter = 2;
 
     int obstacleCounter = 10;
 
