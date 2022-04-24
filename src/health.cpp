@@ -15,11 +15,11 @@ void Health::updateHealth(Obstacles* obstacle){
     HealthObstacle healthbump;
     if (typeid(*obstacle).name() == typeid(square).name()){
         health -= 25;
-    } elif (typeid(*obstacle).name() == typeid(wall).name()){
+    } else if (typeid(*obstacle).name() == typeid(wall).name()){
         health -= 50;
-    } elif (typeid(*obstacle).name() == typeid(bomb).name()){
+    } else if (typeid(*obstacle).name() == typeid(bomb).name()){
         health = 0;
-    } elif (typeid(*obstacle).name() == typeid(healthbump).name()){
+    } else if (typeid(*obstacle).name() == typeid(healthbump).name()){
         health += 25;
     }
 }
