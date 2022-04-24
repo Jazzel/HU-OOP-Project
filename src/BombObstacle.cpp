@@ -7,7 +7,7 @@ Obstacles *BombObstacle::getObstacles(SDL_Rect mover)
 
     asset->mover = mover;
 
-    // cout << obstacles.size() << "Square triggered !!" << endl;
+    // cout << obstacles.size() << "Square triggered !!" << endl; // they are 
 
     return asset;
 }
