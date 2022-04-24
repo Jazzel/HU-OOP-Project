@@ -64,6 +64,31 @@ which is necessary to make the game interactive.
 
 ### How to play
 
+- Open this folder in VSCode and change directory to src folder using:
+
+  `cd src`
+
+- Open VSCode terminal and run the following command over there to compile the game:
+
+  `g++ \*.cpp -IC:\mingw_dev_lib\include\SDL2 -LC:\mingw_dev_lib\lib -w -lmingw32 -lSDL2main -lSDL2 -lSDL2_image`
+
+- Run the executable file for the game by running the following command on the terminal:
+
+  `.\a.exe`
+
+- On the Start Screen, click on the Start button. Then, select the level of the game you want to play.
+
+- On the game screen, use the left and right arrow keys to move the vehicle and avoid as many obstacles as you can and consume
+  the health bonus to prolong your game play. Beware of the Bomb!!
+
+- Press Escape key to stop playing, and you will be directed to the Start screen.
+
+- To check the credits, click on the credits button on the start screen. Press Escape key to return to the Start screen.
+
+ENJOY THE GAME!
+
+### Guide to gameplay
+
 The games uses the mouse to navigate between levels/screens and `←` `→` `a` and `d` keys for the movement of vehicle.
 
 - `←` and `a` keys moves the vehicle to the left.

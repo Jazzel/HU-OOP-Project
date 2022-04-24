@@ -93,7 +93,7 @@ bool Game::loadMedia()
 	gTexture = loadTexture("assets/background.png");
 
 	// Load music
-	//gMusic = Mix_LoadMUS("sounds/beat.wav");
+	// gMusic = Mix_LoadMUS("sounds/beat.wav");
 	gMusic = Mix_LoadMUS("sounds/RickRoll.wav");
 
 	// Load sound effects
@@ -206,7 +206,6 @@ void Game::run()
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse, &yMouse);
 				// bhuruz.();
-				// bhuruz.createObject(xMouse, yMouse);
 				bhuruz.onClickHandler(xMouse, yMouse);
 			}
 			else

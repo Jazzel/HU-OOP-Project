@@ -549,6 +549,20 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
     // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
 }
 
+/**
+ * ? @brief createObject()
+ * * takes x and y pixels of screen and creates objects on the screen
+ * * calls ObjectCreater::getObject function to get object pointer of Unit class
+ * * which containes reference to Bee, Butterfly or Pigeon class
+ *
+ * ? @param x
+ * * x co-ordinate of the screen where mouse is clicked
+ *
+ * ? @param y
+ * * y co-ordinate of the screen where mouse is clicked
+ *
+ */
+
 void Bhuruz::onClickHandler(int x, int y)
 {
     std::cout << "Mouse clicked at: " << x << " -- " << y << std::endl;
@@ -606,31 +620,6 @@ void Bhuruz::onClickHandler(int x, int y)
         }
         Bhuruz::showScreens();
     }
-}
-
-/**
- * ? @brief createObject()
- * * takes x and y pixels of screen and creates objects on the screen
- * * calls ObjectCreater::getObject function to get object pointer of Unit class
- * * which containes reference to Bee, Butterfly or Pigeon class
- *
- * ? @param x
- * * x co-ordinate of the screen where mouse is clicked
- *
- * ? @param y
- * * y co-ordinate of the screen where mouse is clicked
- *
- */
-
-void Bhuruz::createObject(int x, int y)
-{
-
-    Bhuruz::onClickHandler(x, y);
-
-    // int randomInteger = generateRandomInteger(1, 1);
-    // objects.push_back(ObjectCreater::getObject(x, y, randomInteger));
-
-    std::cout << "Mouse clicked at: " << x << " -- " << y << std::endl;
 }
 
 void Bhuruz::makeMove(string direction)
