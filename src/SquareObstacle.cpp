@@ -52,16 +52,6 @@ void SquareObstacle::fly()
 
     mover.h += 5;
     mover.w += 5;
-    // SquareObstacle obstacles = new SquareObstacle();
-    // obstacles->mover = {700, 392, 20, 20};
-    // obstacleObjects.push_back(obstacles->getObstacles());
-    // SquareObstacle obstacles = new SquareObstacle();
-    // obstacles = new SquareObstacle();
-    // obstacles->mover = {650, 500, 20, 20};
-    // obstacleObjects.push_back(obstacles->getObstacles());
-    // SquareObstacle obstacles = new SquareObstacle();
-    // obstacles->mover = {750, 500, 20, 20};
-    // obstacleObjects.push_back(obstacles->getObstacles());
 }
 
 SquareObstacle::SquareObstacle()

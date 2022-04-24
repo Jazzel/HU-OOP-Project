@@ -125,22 +125,7 @@ void Bhuruz::drawObjects()
             pt.y = 10;
             moverRect = {(float)obstacleObjects[i]->mover.x, (float)obstacleObjects[i]->mover.y, (float)obstacleObjects[i]->mover.w, (float)obstacleObjects[i]->mover.h};
             p = &moverRect;
-            if (typeid(*obstacleObjects[i]).name() == typeid(SquareObstacle).name())
-            {
-                ((SquareObstacle *)(obstacleObjects[i]))->fly();
-            }
-            else if (typeid(*obstacleObjects[i]).name() == typeid(BombObstacle).name())
-            {
-                ((BombObstacle *)(obstacleObjects[i]))->fly();
-            }
-            else if (typeid(*obstacleObjects[i]).name() == typeid(HealthObstacle).name())
-            {
-                ((HealthObstacle *)(obstacleObjects[i]))->fly();
-            }
-            else if (typeid(*obstacleObjects[i]).name() == typeid(WallObstacle).name())
-            {
-                ((WallObstacle *)(obstacleObjects[i]))->fly();
-            }
+            obstacleObjects[i]->fly();
 
             if (level == Level::HARD)
             {
@@ -187,7 +172,7 @@ void Bhuruz::drawObjects()
         counter--;
         if (counter <= 0)
         {
-            counter = 20;
+            counter = 5;
             collide = false;
         }
     }
@@ -397,7 +382,6 @@ void Bhuruz::showScreens()
     obstacleObjects = {};
     scoreObjects = {};
 
-    _levelScreen = 0;
     theta = 0;
 
     toggle = 1;
@@ -478,7 +462,10 @@ void Bhuruz::showScreens()
     case GameState::RUNNING:
     {
 
+        // ? health
         gameHealth = new Health();
+
+        // ? score
         score = new Score();
 
         obstacleObjects = {};
@@ -492,8 +479,6 @@ void Bhuruz::showScreens()
         levelBackground->mover = {0, 0, 1800, 1800};
 
         gameObjects.push_back(levelBackground);
-
-        // Todo: score | speed
 
         break;
     }
@@ -562,19 +547,6 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
         collide = true;
     }
     // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
-}
-
-void Bhuruz::startGame()
-{
-    // gameState = GameState::GAME_OVER;
-
-    // Obstacles *obstacles = new Obstacles();
-    // obstacles->initObstacles();
-
-    // ScreenObject *vehicle = new Vehicle();
-    // gameObjects.push_back(vehicle);
-
-    // Bhuruz::showScreens();
 }
 
 void Bhuruz::onClickHandler(int x, int y)
@@ -684,7 +656,6 @@ Bhuruz::Bhuruz()
     obstacleObjects = {};
     scoreObjects = {};
 
-    _levelScreen = 0;
     theta = 0;
 
     toggle = 1;

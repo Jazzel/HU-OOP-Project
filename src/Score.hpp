@@ -9,7 +9,7 @@ private:
     int score = 0;
 
 public:
-    Score(/* args */);
+    Score();
     ~Score();
 
     int getScore();
