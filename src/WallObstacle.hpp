@@ -10,5 +10,7 @@ class WallObstacle : public Obstacles
 private:
 public:
     WallObstacle();
-    Obstacles *getObstacles() override;
+    Obstacles *getObstacles(SDL_Rect) override;
+
+    void fly();
 };

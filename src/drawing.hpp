@@ -1,4 +1,6 @@
 #include <SDL.h>
+#include <SDL_mixer.h>
+
 #pragma once
 class Drawing
 {
@@ -13,4 +15,10 @@ public:
     static SDL_Texture *levelOne;
     static SDL_Texture *levelTwo;
     static SDL_Texture *levelThree;
+
+    // The sound effects that will be used
+    static Mix_Chunk *gHealth;
+    static Mix_Chunk *gCrash;
+    static Mix_Chunk *gExplode;
+    static Mix_Chunk *gGameOver;
 };

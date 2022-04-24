@@ -13,21 +13,29 @@ void Health::updateHealth(Obstacles *obstacle)
     WallObstacle wall;
     BombObstacle bomb;
     HealthObstacle healthbump;
+
     if (typeid(*obstacle).name() == typeid(square).name())
     {
+        Mix_PlayChannel(-1, Drawing::gCrash, 0);
         health -= 25;
     }
     else if (typeid(*obstacle).name() == typeid(wall).name())
     {
+        Mix_PlayChannel(-1, Drawing::gCrash, 0);
         health -= 50;
     }
     else if (typeid(*obstacle).name() == typeid(bomb).name())
     {
+        Mix_PlayChannel(-1, Drawing::gExplode, 0);
         health = 0;
     }
     else if (typeid(*obstacle).name() == typeid(healthbump).name())
     {
-        health += 25;
+        Mix_PlayChannel(-1, Drawing::gHealth, 0);
+        if (health != 100)
+        {
+            health += 25;
+        }
     }
     else
     {
@@ -60,8 +68,6 @@ void Health::displayHealth()
     }
     SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &src, &mover);
 }
-
-int Health::getHealth() { return health; }
 
 Health::Health()
 {

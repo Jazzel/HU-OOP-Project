@@ -11,6 +11,7 @@
 #include "Asset.hpp"
 #include "Score.hpp"
 #include "Health.hpp"
+#include "Vehicle.hpp"
 
 using namespace std;
 
@@ -45,7 +46,7 @@ using namespace std;
 class Bhuruz
 {
 private:
-    vector<ScreenObject *> gameObjects;
+    vector<Asset *> gameObjects;
     vector<Asset *> screenObjects;
     vector<Obstacles *> obstacleObjects;
     vector<Asset *> scoreObjects;
@@ -64,7 +65,9 @@ private:
 
     bool collide = 0;
 
-    int counter = 20;
+    int counter = 2;
+
+    int obstacleCounter = 10;
 
 public:
     void drawObjects();
@@ -75,8 +78,9 @@ public:
     void init();
     void onClickHandler(int, int);
     void startGame();
-    // void detectCollision(float, float, float, float);
     void detectCollision(int, int, int, int, Obstacles *);
+    void detectCollision(float, float, float, float, Obstacles *);
+    // void detectCollision(int, int, int, int, Obstacles *);
     void showScore(int);
 
     // void showCreditsScreen();

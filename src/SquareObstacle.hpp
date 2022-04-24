@@ -9,7 +9,10 @@ class SquareObstacle : public Obstacles
 {
 private:
 public:
+    int pos = 1;
+
     SquareObstacle();
 
-    Obstacles *getObstacles() override;
+    void fly();
+    Obstacles *getObstacles(SDL_Rect) override;
 };
