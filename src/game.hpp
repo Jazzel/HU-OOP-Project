@@ -19,17 +19,23 @@
  *
  * ? @functions
  * * init()
- * *    - empty constructor which initializes the obstacle
- * * loadTexture(string))
- * *    - returns an pointing refernce to obstacle
- * *    - this function is override hence ploymorphism is used here for obstacle creation
+ * *    - initializes SDL, the image loader and SDL mixer
+ * *    - this function creates the window and renderer and assigns default colour to it (white)
+ * *    - checks whether there is no error in SDL initialization
+ * * loadTexture(string)
+ * *    - takes a string path for image and all loads that image into SDL surface
+ * *    - returns a poiniting reference to new created surface
  * * run()
- * *    - it defines the path of the obstacle
- * *    - how the obstacle will draw away from center and move out of the screen
+ * *    - it takes input from the user, either arrow keys or mouse and desired functionality is defined
+ * *    - sdl delay is used to dealy our frame, new renderer is created and displayed
+ * *    - background music is played continously using loop to create a pleasant experience for user
  * * loadMedia()
- *      -
+ * *    - loads images using SDL texture that are used either for assets or for background
+ * *    - loads sound effects and background music using SDL mixer
  * * close ()
- *      -
+ * *    - using SDL's destroy and mixer free function all images and sound effects are destroyed
+ * *    - destroying renderer and window, quitting all systems
+ * *    - this function is called at the end of thr program
  */
 
 class Game
