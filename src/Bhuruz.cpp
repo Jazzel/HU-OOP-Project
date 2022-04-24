@@ -172,7 +172,7 @@ void Bhuruz::drawObjects()
         counter--;
         if (counter <= 0)
         {
-            counter = 20;
+            counter = 5;
             collide = false;
         }
     }
@@ -382,7 +382,6 @@ void Bhuruz::showScreens()
     obstacleObjects = {};
     scoreObjects = {};
 
-    _levelScreen = 0;
     theta = 0;
 
     toggle = 1;
@@ -463,7 +462,10 @@ void Bhuruz::showScreens()
     case GameState::RUNNING:
     {
 
+        // ? health
         gameHealth = new Health();
+
+        // ? score
         score = new Score();
 
         obstacleObjects = {};
@@ -477,8 +479,6 @@ void Bhuruz::showScreens()
         levelBackground->mover = {0, 0, 1800, 1800};
 
         gameObjects.push_back(levelBackground);
-
-        // Todo: score | speed
 
         break;
     }
@@ -547,19 +547,6 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
         collide = true;
     }
     // else if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x)
-}
-
-void Bhuruz::startGame()
-{
-    // gameState = GameState::GAME_OVER;
-
-    // Obstacles *obstacles = new Obstacles();
-    // obstacles->initObstacles();
-
-    // ScreenObject *vehicle = new Vehicle();
-    // gameObjects.push_back(vehicle);
-
-    // Bhuruz::showScreens();
 }
 
 void Bhuruz::onClickHandler(int x, int y)
@@ -669,7 +656,6 @@ Bhuruz::Bhuruz()
     obstacleObjects = {};
     scoreObjects = {};
 
-    _levelScreen = 0;
     theta = 0;
 
     toggle = 1;

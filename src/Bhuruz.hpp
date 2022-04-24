@@ -58,14 +58,13 @@ private:
     Score *score;
     Health *gameHealth;
 
-    bool _levelScreen = 0;
     double theta = 0;
 
     bool toggle = 1;
 
     bool collide = 0;
 
-    int counter = 2;
+    int counter = 5;
 
     int obstacleCounter = 10;
 
@@ -77,7 +76,6 @@ public:
     void makeMove(string);
     void init();
     void onClickHandler(int, int);
-    void startGame();
     void detectCollision(int, int, int, int, Obstacles *);
     void detectCollision(float, float, float, float, Obstacles *);
     // void detectCollision(int, int, int, int, Obstacles *);
