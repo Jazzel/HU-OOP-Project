@@ -1,5 +1,14 @@
+//? headerfiles
 #include "game.hpp"
-
+/**
+ * ? @brief main
+ * * the main game class, which defines the functionality of the game
+ *
+ * ? @param
+ * * SCREEN WIDTH - int const, defining width of screen
+ * * SCREEN HEIGHT - int const, defining height of screen
+ *      -
+ */
 int main(int argc, char *argv[])
 {
     Game game;

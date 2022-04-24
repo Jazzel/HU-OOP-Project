@@ -1,4 +1,4 @@
-
+//?imports
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
@@ -18,14 +18,18 @@
  * * gTexture - SDL Texture * , Current displayed texture
  *
  * ? @functions
- * * BombObstacle()
+ * * init()
  * *    - empty constructor which initializes the obstacle
- * * getObstacles(SDL_Rect)
+ * * loadTexture(string))
  * *    - returns an pointing refernce to obstacle
  * *    - this function is override hence ploymorphism is used here for obstacle creation
- * * fly()
+ * * run()
  * *    - it defines the path of the obstacle
  * *    - how the obstacle will draw away from center and move out of the screen
+ * * loadMedia()
+ *      -
+ * * close ()
+ *      -
  */
 
 class Game

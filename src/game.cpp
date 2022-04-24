@@ -24,10 +24,6 @@ Mix_Chunk *Drawing::gGameOver = NULL;
  * * dynamically creates a bomb obstacle using polymorphism
  * * defines the assets's src rect and assigns mover
  *
- * ? @param
- *
- * * SDL_RECT - mover, where the object has to be created
- *
  * ! return
  * * obstacles * - a pointing reference to obstacle which is created
  */
@@ -90,7 +86,14 @@ bool Game::init()
 
 	return success;
 }
-
+/**
+ * ? @brief loadMedia()
+ * * dynamically creates a bomb obstacle using polymorphism
+ * * defines the assets's src rect and assigns mover
+ *
+ * ! return
+ * * obstacles * - a pointing reference to obstacle which is created
+ */
 bool Game::loadMedia()
 {
 	// Loading success flag
@@ -122,7 +125,14 @@ bool Game::loadMedia()
 	}
 	return success;
 }
-
+/**
+ * ? @brief close()
+ * * dynamically creates a bomb obstacle using polymorphism
+ * * defines the assets's src rect and assigns mover
+ *
+ * ! return
+ * * obstacles * - a pointing reference to obstacle which is created
+ */
 void Game::close()
 {
 	// Free loaded images
@@ -167,7 +177,18 @@ void Game::close()
 	SDL_Quit();
 	Mix_Quit();
 }
-
+/**
+ * ? @brief loadTexture()
+ * * dynamically creates a bomb obstacle using polymorphism
+ * * defines the assets's src rect and assigns mover
+ *
+ * ? @param
+ *
+ * * string -
+ *
+ * ! return
+ * * SDL_Texture* - a pointing reference to obstacle which is created
+ */
 SDL_Texture *Game::loadTexture(std::string path)
 {
 	// The final texture
@@ -194,6 +215,12 @@ SDL_Texture *Game::loadTexture(std::string path)
 
 	return newTexture;
 }
+/**
+ * ? @brief run()
+ * * dynamically creates a bomb obstacle using polymorphism
+ * * defines the assets's src rect and assigns mover
+ *
+ */
 void Game::run()
 {
 	bool quit = false;
