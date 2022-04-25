@@ -244,11 +244,11 @@ void Game::run()
 			}
 			else
 			{
-				if (e.key.keysym.sym == SDLK_RIGHT)
+				if (e.key.keysym.sym == SDLK_RIGHT || e.key.keysym.sym == SDLK_d)
 				{
 					bhuruz.makeMove("RIGHT");
 				}
-				if (e.key.keysym.sym == SDLK_LEFT)
+				if (e.key.keysym.sym == SDLK_LEFT || e.key.keysym.sym == SDLK_a)
 				{
 					bhuruz.makeMove("LEFT");
 				}

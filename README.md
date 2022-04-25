@@ -1,8 +1,4 @@
-# Bhuruz
-
 ## OOP Project
-
-### [GitHub Repository](https://github.com/Jazzel/HU-OOP-Project)
 
 ### Team
 
@@ -65,7 +61,7 @@ which is necessary to make the game interactive.
 
 - Compiling all the files:
 
-  `g++ *.cpp -IC:\mingw_dev_lib\include\SDL2 -LC:\mingw_dev_lib\lib -w -lmingw32 -lSDL2main -lSDL2 -lSDL2_image `
+  `g++ *.cpp -IC:\mingw_dev_lib\include\SDL2 -LC:\mingw_dev_lib\lib -w -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer`
 
 - Executing the project:
 
@@ -84,7 +80,7 @@ which is necessary to make the game interactive.
 
 - Open VSCode terminal and run the following command over there to compile the game:
 
-  `g++ \*.cpp -IC:\mingw_dev_lib\include\SDL2 -LC:\mingw_dev_lib\lib -w -lmingw32 -lSDL2main -lSDL2 -lSDL2_image`
+  `g++ \*.cpp -IC:\mingw_dev_lib\include\SDL2 -LC:\mingw_dev_lib\lib -w -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer`
 
 - Run the executable file for the game by running the following command on the terminal:
 
@@ -140,3 +136,7 @@ At this level the obstacles will appear with the fastest speed. They also rotate
 #### Level Screen
 
 <img src="./screenshots/Level.png" />
+
+#### Game over
+
+<img src="./screenshots/Gameover.png" />
