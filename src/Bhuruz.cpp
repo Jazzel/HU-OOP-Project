@@ -58,7 +58,7 @@ void Bhuruz::drawObjects()
     q = &pt;
     SDL_FRect *p;
     SDL_FRect moverRect;
-
+                                // change 1
     SDL_Event e;
 
     SDL_RendererFlip a = SDL_FLIP_NONE;
