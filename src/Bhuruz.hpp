@@ -59,6 +59,8 @@ using namespace std;
  * *      - type: int - counter for checking collision after every assigned value.
  * *      - type: int - counter for creating obstacle after every assigned value.
  * *
+ * *  - rotation switch
+ * *        -type :boolean - a variable which is used in the movement of obstacles in the hard level
  *
  * ? @functions
  * * drawObjects():
