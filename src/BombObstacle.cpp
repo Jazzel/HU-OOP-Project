@@ -1,4 +1,18 @@
+// ? header files
 #include "BombObstacle.hpp"
+
+/**
+ * ? @brief getobstacle()
+ * * dynamically creates a bomb obstacle using polymorphism
+ * * defines the assets's src rect and assigns mover
+ *
+ * ? @param
+ *
+ * * SDL_RECT - mover, where the object has to be created
+ *
+ * ! return
+ * * obstacles * - a pointing reference to obstacle which is created
+ */
 
 Obstacles *BombObstacle::getObstacles(SDL_Rect mover)
 {
@@ -7,12 +21,15 @@ Obstacles *BombObstacle::getObstacles(SDL_Rect mover)
 
     asset->mover = mover;
 
-    // cout << obstacles.size() << "Square triggered !!" << endl; // they are   
-    // issuing 
-
     return asset;
 }
 
+/**
+ * ? @brief fly()
+ * * if the object is either on left or right side then it travels further in that direction
+ * * otherwise only the y coordinate increaes
+ * * the obstcale is enlarged by incrementing its height and width
+ */
 void BombObstacle::fly()
 {
 
@@ -33,7 +50,10 @@ void BombObstacle::fly()
     mover.h += 5;
     mover.w += 5;
 }
-
+/**
+ * ? @brief BombObstacle()
+ * * an empty constructor for bomb obstacle creation
+ */
 BombObstacle::BombObstacle()
 {
 }

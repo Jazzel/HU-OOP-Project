@@ -1,5 +1,18 @@
+//? header files
 #include "WallObstacle.hpp"
-
+/**
+ * ? @brief getobstacle()
+ * * dynamically creates a wall obstacle using polymorphism
+ * * using if statements checks which wall should be created and hence src rect is defined
+ * * assets's mover is assigned with mover from arguements
+ *
+ * ? @param
+ *
+ * * SDL_RECT - mover, where the object has to be created
+ *
+ * ! return
+ * * obstacles * - a pointing reference to obstacle which is created
+ */
 Obstacles *WallObstacle::getObstacles(SDL_Rect mover)
 {
     WallObstacle *asset = new WallObstacle();
@@ -21,13 +34,14 @@ Obstacles *WallObstacle::getObstacles(SDL_Rect mover)
         asset->mover.w == mover.w;
         asset->mover.h == mover.h;
     }
-    // else
-    // {
-    // }
 
     return asset;
 }
-
+/**
+ * ? @brief fly()
+ * * if the object is either on left or right side then it travels further in that direction
+ * * the height and width of the wall is increased hence to create a 3d perspective
+ */
 void WallObstacle::fly()
 {
     if (mover.x <= 650)
@@ -43,7 +57,10 @@ void WallObstacle::fly()
     mover.h += 20;
     mover.w += 10;
 }
-
+/**
+ * ? @brief WallObstacle()
+ * * an empty constructor for Wall obstacle creation
+ */
 WallObstacle::WallObstacle()
 {
 }

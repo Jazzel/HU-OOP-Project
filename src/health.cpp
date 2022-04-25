@@ -1,11 +1,17 @@
-#pragma once
-#include "health.hpp"
+#include "Health.hpp"
 #include <iostream>
-
-//#include "drawing.hpp"
 using namespace std;
 
-// Drawing::gameAssets = loadTexture("assets/game-assets.png");
+/**
+ * ?brief updateHealth()
+ * * function used to update the health integer in the object of the Health type
+ * * each sound is played depending on the status of health
+ *
+ * @param obstacle
+ *
+ * * uses typeid().name() to compare the obstacle with a dummy obstacle of each type and changes the health accordingly
+ * * using Mix_playChannel command, specific sound effects are played for crash, explode (bomb) and gaining health
+ */
 
 void Health::updateHealth(Obstacles *obstacle)
 {
@@ -18,16 +24,19 @@ void Health::updateHealth(Obstacles *obstacle)
     {
         Mix_PlayChannel(-1, Drawing::gCrash, 0);
         health -= 25;
+        cout << "Square detected" << endl;
     }
     else if (typeid(*obstacle).name() == typeid(wall).name())
     {
         Mix_PlayChannel(-1, Drawing::gCrash, 0);
         health -= 50;
+        cout << "Wall detected" << endl;
     }
     else if (typeid(*obstacle).name() == typeid(bomb).name())
     {
         Mix_PlayChannel(-1, Drawing::gExplode, 0);
         health = 0;
+        cout << "Bomb detected" << endl;
     }
     else if (typeid(*obstacle).name() == typeid(healthbump).name())
     {
@@ -35,14 +44,21 @@ void Health::updateHealth(Obstacles *obstacle)
         if (health != 100)
         {
             health += 25;
+            cout << "Health obstacle" << endl;
         }
     }
     else
     {
         health -= 25;
+        cout << "Square detected 2.0" << endl;
     }
 }
-
+/**
+ * ? brief displayHealth()
+ * * function used to display the health bars
+ * * compares the health integer with the pre-set discrete levels of health
+ * * displays the health bars according to the current level of health.
+ */
 void Health::displayHealth()
 {
     SDL_Rect src, mover;
@@ -68,7 +84,10 @@ void Health::displayHealth()
     }
     SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &src, &mover);
 }
-
+/**
+ * ?brief Health()
+ * * empty constructor, which sets the default value of health attribute as 100
+ */
 Health::Health()
 {
     health = 100;

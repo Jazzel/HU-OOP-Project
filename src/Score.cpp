@@ -1,16 +1,35 @@
+//? header files
 #include "Score.hpp"
 #include "Asset.hpp"
 #include "drawing.hpp"
-
+/**
+ * ? @brief Score()
+ * * empty constructor, ehich initializes score to zero
+ */
 Score::Score()
 {
     score = 0;
 }
-
+/**
+ * ? @brief ~Score()
+ * * destructor
+ */
 Score::~Score()
 {
 }
-
+/**
+ * ? @brief getSRCNumber()
+ * * it takes a number as arguements
+ * * from 0 to 9, each switch statements represent a number
+ * * if the number is found, its src is returned
+ *
+ * ? @param
+ *
+ * * int - number which has to be displayed
+ *
+ * ! return
+ * * SDL-Rect, src of the score digit which has to be displayed
+ */
 SDL_Rect getSRCNumber(int number)
 {
     SDL_Rect src;
@@ -61,7 +80,16 @@ SDL_Rect getSRCNumber(int number)
     }
     return src;
 }
-
+/**
+ * ? @brief draw()
+ * * this function is used to display score on the game over screen
+ * * a vector conatining integers named scored is created
+ * * position an integer, by default is equal to 850.
+ * *    -it is used to display number on appropriate position on screen
+ * * each digit from score is extracted, pushed to vector, its src is extracted and its drawn on the screen
+ * * pos is decremented by 50 to display corresponding digit
+ *
+ */
 void Score::draw()
 {
     int pos = 850;
@@ -90,8 +118,24 @@ void Score::draw()
     }
 }
 
+/**
+ * ? @brief  operator++
+ * * overloaded ++ (increment) operator to update score automatically.
+ *
+ */
+void Score::operator++()
+{
+    ++score;
+}
+
+/**
+ * ? @brief getScore()
+ * * score is incremented in this function and returs the updated score
+ *
+ * ! return
+ * * int - score is returned
+ */
 int Score::getScore()
 {
-    score++;
     return score;
 }
