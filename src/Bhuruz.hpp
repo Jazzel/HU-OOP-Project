@@ -46,7 +46,10 @@ using namespace std;
  * *      - a pointing reference to Health class to enable health implmentation.
  *
  * *  - theta
- * *      - type: double - to rotate screen and obstacles.
+ * *      - type: double - to rotate obstacles.
+ *
+ * *  - backTheta
+ * *      - type: double - to rotate background.
  *
  * *  - toggle, collide
  * *      - type: bool - enables class to store more obstacles in vector obstacleObjects.
