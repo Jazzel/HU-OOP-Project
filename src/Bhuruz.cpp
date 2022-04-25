@@ -544,6 +544,15 @@ void Bhuruz::showScreens()
     {
         obstacleObjects = {};
 
+        // ? health
+        gameHealth = new Health();
+
+        // ? score
+        score = new Score();
+
+        // ? vehicle
+        vehicle = new Vehicle();
+
         // ? level background
         Asset *levelBackground = new Asset();
 
