@@ -38,7 +38,7 @@ which is necessary to make the game interactive.
 
 ### UML Design
 
-- `docs` folder or [click here](https://github.com/Jazzel/HU-OOP-Project/blob/main/docs/Project%20-%20OOP%20initial%20and%20final%20UML%20design.pdf)
+- `docs` folder or [click here](https://github.com/Jazzel/HU-OOP-Project/blob/main/docs/BHURUZ%20-%20INITIAL%20%26%20FINAL%20UML%20DESIGN.pdf)
 
 ### Design Patterns
 
