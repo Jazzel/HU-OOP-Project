@@ -255,7 +255,7 @@ void Game::run()
 			}
 			if (Mix_PlayingMusic() == 0)
 			{
-				Mix_PlayMusic(gMusic, 20);
+				Mix_PlayMusic(gMusic, -1);
 			}
 			else
 			{

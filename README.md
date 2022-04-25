@@ -40,6 +40,20 @@ objects, abstraction, encapsulation, inheritance and polymorphism. To improve th
 the objects will be created dynamically. SDL 2.0 graphic library will be used to render the graphics for this game,
 which is necessary to make the game interactive.
 
+### UML Design
+
+- `docs` folder or [click here](https://github.com/Jazzel/HU-OOP-Project/blob/main/docs/Project%20-%20OOP%20initial%20and%20final%20UML%20design.pdf)
+
+### Design Patterns
+
+- Factory Pattern - Obstacles class implements WallObstacles, HealthObstacle, BombObstacle, SquareObstacle classes.
+- Builder Pattern - Bhuruz class builds the game using all the implemented classes.
+- Singleton Pattern - WallObstacles, HealthObstacle, BombObstacle, SquareObstacle contains getObstacles() function which creates a copy of itself and returns as a pointer.
+- Adapter Pattern - Asset class adapts every class that has mover and src (SDL_Rect).
+- Chain-of-responsibility Pattern - Bhuruz class handles all the implementation and logic of the game.
+- State Pattern - GameState, LevelState decides what to show on screen.
+- Strategy Pattern - Bhuruz class creates random variables and creates Obstacle of different types on screen.
+
 ### Environment
 
 - C++ (^20) - [Official Documentation](https://www.cplusplus.com/doc/tutorial/)

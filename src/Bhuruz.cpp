@@ -692,7 +692,6 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
  * * y co-ordinate of the screen where mouse is clicked
  *
  */
-
 void Bhuruz::onClickHandler(int x, int y)
 {
     std::cout << "Mouse clicked at: " << x << " -- " << y << std::endl;
