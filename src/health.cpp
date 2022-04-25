@@ -1,4 +1,4 @@
-#include "health.hpp"
+#include "Health.hpp"
 #include <iostream>
 using namespace std;
 
@@ -54,7 +54,7 @@ void Health::updateHealth(Obstacles *obstacle)
     }
 }
 /**
- * ?brief displayHealth()
+ * ? brief displayHealth()
  * * function used to display the health bars
  * * compares the health integer with the pre-set discrete levels of health
  * * displays the health bars according to the current level of health.

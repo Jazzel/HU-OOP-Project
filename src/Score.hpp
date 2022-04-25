@@ -22,8 +22,11 @@
  * *    - vector of int type stores all digits present in score
  * *        - src of each digit is extracted using helper function
  * *        - each object is drawn on the game over screen
- * *getScore()
- * *    - increments and returns the updtaed score
+ * * getScore()
+ * *    - increments and returns the updated score
+ * * operator++()
+ * *    - overloaded ++ (increment) operator to update score automatically.
+ *
  */
 using namespace std;
 
@@ -35,6 +38,8 @@ private:
 public:
     Score();
     ~Score();
+
+    void operator++();
 
     int getScore();
     // void incrementScore();

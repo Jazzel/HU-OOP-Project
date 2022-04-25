@@ -117,6 +117,17 @@ void Score::draw()
         SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &number->src, &number->mover);
     }
 }
+
+/**
+ * ? @brief  operator++
+ * * overloaded ++ (increment) operator to update score automatically.
+ *
+ */
+void Score::operator++()
+{
+    ++score;
+}
+
 /**
  * ? @brief getScore()
  * * score is incremented in this function and returs the updated score
@@ -126,6 +137,5 @@ void Score::draw()
  */
 int Score::getScore()
 {
-    score++;
     return score;
 }

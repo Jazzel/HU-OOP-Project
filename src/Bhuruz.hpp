@@ -127,6 +127,7 @@ private:
     Score *score;
     Health *gameHealth;
 
+    double backTheta = 0;
     double theta = 0;
     bool toggle = 1;
     bool collide = 0;
@@ -140,8 +141,8 @@ public:
     int generateRandomInteger(int, int);
     void makeMove(string);
     void onClickHandler(int, int);
-    void detectCollision(int, int, int, int, Obstacles *);
-    void detectCollision(float, float, float, float, Obstacles *);
+    void detectCollision(Obstacles *, int);
+    void detectCollision(float, float, float, float, Obstacles *, int);
     void showScore(int);
     void showScreens();
 

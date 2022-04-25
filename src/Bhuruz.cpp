@@ -75,7 +75,7 @@ void Bhuruz::drawObjects()
                 pt.y = 900;
                 moverRect = {-195, -480, 1800, 1800};
                 p = &moverRect;
-                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelOne, NULL, p, theta, q, a);
+                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelOne, NULL, p, backTheta, q, a);
                 break;
             }
 
@@ -86,7 +86,7 @@ void Bhuruz::drawObjects()
                 moverRect = {-195, -480, 1800, 1800};
                 p = &moverRect;
 
-                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelTwo, NULL, p, theta, q, a);
+                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelTwo, NULL, p, backTheta, q, a);
                 break;
             }
 
@@ -97,7 +97,7 @@ void Bhuruz::drawObjects()
                 moverRect = {0, -400, 1600, 1600};
                 p = &moverRect;
 
-                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelThree, NULL, p, theta, q, a);
+                SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelThree, NULL, p, backTheta, q, a);
                 break;
             }
 
@@ -142,18 +142,23 @@ void Bhuruz::drawObjects()
             if (level == Level::HARD)
             {
                 SDL_RenderCopyExF(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, p, theta, q, a);
-                detectCollision(moverRect.x, moverRect.y, moverRect.w, moverRect.h, obstacleObjects[i]);
+                detectCollision(moverRect.x, moverRect.y, moverRect.w, moverRect.h, obstacleObjects[i], i);
             }
             else
             {
                 SDL_RenderCopy(Drawing::gRenderer, Drawing::gameAssets, &obstacleObjects[i]->src, &obstacleObjects[i]->mover);
-                detectCollision(obstacleObjects[i]->mover.x, obstacleObjects[i]->mover.y, obstacleObjects[i]->mover.w, obstacleObjects[i]->mover.h, obstacleObjects[i]);
+                detectCollision(obstacleObjects[i], i);
             }
             if (obstacleObjects[i]->deleteObjects())
             {
+                delete obstacleObjects[i];
                 obstacleObjects.erase(obstacleObjects.begin() + i);
             }
         }
+
+        // ? increment score and create Assets for score
+        ++(*score);
+        Bhuruz::showScore(score->getScore());
 
         // ? score
         for (int i = 0; i < scoreObjects.size(); i++)
@@ -163,9 +168,6 @@ void Bhuruz::drawObjects()
         // ? vehicle
         gameHealth->displayHealth();
         vehicle->draw();
-
-        // ? score
-        Bhuruz::showScore(score->getScore());
     }
 
     if (gameState == GameState::GAME_OVER)
@@ -592,6 +594,7 @@ void Bhuruz::showScreens()
         break;
     }
 }
+
 /**
  * ? @brief detectCollision()
  * * using vehicles's mover rect and integers arguements given checking whether ther is a collison or not
@@ -613,12 +616,15 @@ void Bhuruz::showScreens()
  * ? @param obstacles*
  * * *obstacles- a pointing refernce to the obstacles for which collision is being checked
  */
-void Bhuruz::detectCollision(int x, int y, int w, int h, Obstacles *obstacle)
+void Bhuruz::detectCollision(Obstacles *obstacle, int i)
 {
-    if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
+    // if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
+    if (SDL_HasIntersection(&obstacle->mover, &vehicle->mover))
     {
         cout << "Crashed !!" << endl;
         gameHealth->updateHealth(obstacle);
+        obstacleObjects.erase(obstacleObjects.begin() + i);
+
         if (gameHealth->getHealth() <= 0)
         {
             cout << "Game Over !!" << endl;
@@ -649,12 +655,14 @@ void Bhuruz::detectCollision(int x, int y, int w, int h, Obstacles *obstacle)
  * ? @param obstacles*
  * * *obstacles- a pointing refernce to the obstacles for which collision is being checked
  */
-void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obstacle)
+void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obstacle, int i)
 {
     if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
     {
         cout << "Crashed !!" << endl;
         gameHealth->updateHealth(obstacle);
+
+        obstacleObjects.erase(obstacleObjects.begin() + i);
         if (gameHealth->getHealth() <= 0)
         {
             cout << "Game Over !!" << endl;
@@ -757,11 +765,13 @@ void Bhuruz::makeMove(string direction)
         vehicle->initVehicleMovement(direction);
         if (direction == "RIGHT")
         {
-            theta += 10;
+            backTheta += 10;
+            theta += 0.4;
         }
         else if (direction == "LEFT")
         {
-            theta -= 10;
+            backTheta -= 10;
+            theta -= 0.4;
         }
     }
 }
@@ -789,11 +799,35 @@ Bhuruz::Bhuruz()
  */
 Bhuruz::~Bhuruz()
 {
+    backTheta = 0;
+    theta = 0;
+    toggle = 1;
+    collide = 0;
+    counter = 5;
+    obstacleCounter = 10;
 
-    // for (Unit *object : objects)
-    // {
-    //     delete object;
-    //     object = NULL;
-    // }
-    // objects.clear();
+    delete vehicle;
+    delete score;
+    delete gameHealth;
+
+    while (!gameObjects.empty())
+    {
+        delete gameObjects.back();
+        gameObjects.pop_back();
+    }
+    while (!screenObjects.empty())
+    {
+        delete screenObjects.back();
+        screenObjects.pop_back();
+    }
+    while (!obstacleObjects.empty())
+    {
+        delete obstacleObjects.back();
+        obstacleObjects.pop_back();
+    }
+    while (!scoreObjects.empty())
+    {
+        delete scoreObjects.back();
+        scoreObjects.pop_back();
+    }
 }
