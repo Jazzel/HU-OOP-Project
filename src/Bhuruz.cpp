@@ -58,7 +58,6 @@ void Bhuruz::drawObjects()
     q = &pt;
     SDL_FRect *p;
     SDL_FRect moverRect;
-                                // change 1
     SDL_Event e;
 
     SDL_RendererFlip a = SDL_FLIP_NONE;
@@ -92,9 +91,9 @@ void Bhuruz::drawObjects()
 
             case Level::HARD:
             {
-                pt.x = 805;
-                pt.y = 805;
-                moverRect = {0, -400, 1600, 1600};
+                pt.x = 900;
+                pt.y = 900;
+                moverRect = {-195, -480, 1800, 1800};
                 p = &moverRect;
 
                 SDL_RenderCopyExF(Drawing::gRenderer, Drawing::levelThree, NULL, p, backTheta, q, a);
@@ -543,16 +542,7 @@ void Bhuruz::showScreens()
 
     case GameState::RUNNING:
     {
-
-        // ? health
-        gameHealth = new Health();
-
-        // ? score
-        score = new Score();
-
         obstacleObjects = {};
-        // ? vehicle
-        vehicle = new Vehicle();
 
         // ? level background
         Asset *levelBackground = new Asset();
@@ -621,13 +611,13 @@ void Bhuruz::detectCollision(Obstacles *obstacle, int i)
     // if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
     if (SDL_HasIntersection(&obstacle->mover, &vehicle->mover))
     {
-        cout << "Crashed !!" << endl;
+        // cout << "Crashed !!" << endl;
         gameHealth->updateHealth(obstacle);
         obstacleObjects.erase(obstacleObjects.begin() + i);
 
         if (gameHealth->getHealth() <= 0)
         {
-            cout << "Game Over !!" << endl;
+            // cout << "Game Over !!" << endl;
             gameState = GameState::GAME_OVER;
             Bhuruz::showScreens();
         }
@@ -659,13 +649,13 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
 {
     if (vehicle->mover.x <= (x + w) && (vehicle->mover.x + vehicle->mover.w) >= x && vehicle->mover.y <= (y + h) && (vehicle->mover.y + vehicle->mover.h) >= y && !collide)
     {
-        cout << "Crashed !!" << endl;
+        // cout << "Crashed !!" << endl;
         gameHealth->updateHealth(obstacle);
 
         obstacleObjects.erase(obstacleObjects.begin() + i);
         if (gameHealth->getHealth() <= 0)
         {
-            cout << "Game Over !!" << endl;
+            // cout << "Game Over !!" << endl;
             gameState = GameState::GAME_OVER;
             Bhuruz::showScreens();
         }
@@ -694,34 +684,34 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
  */
 void Bhuruz::onClickHandler(int x, int y)
 {
-    std::cout << "Mouse clicked at: " << x << " -- " << y << std::endl;
+    // std::cout << "Mouse clicked at: " << x << " -- " << y << std::endl;
 
     if (gameState == GameState::LEVEL_SELECT)
     {
         if (x > 260 && y > 310 && x < 940 && y < 430)
         {
-            cout << "Easy clicked !" << endl;
+            // cout << "Easy clicked !" << endl;
             obstacleCounter = 15;
             level = Level::EASY;
             gameState = GameState::RUNNING;
         }
         else if (x > 300 && y > 450 && x < 980 && y < 570)
         {
-            cout << "Medium clicked !" << endl;
+            // cout << "Medium clicked !" << endl;
             obstacleCounter = 10;
             level = Level::MEDIUM;
             gameState = GameState::RUNNING;
         }
         else if (x > 340 && y > 590 && x < 1020 && y < 710)
         {
-            cout << "Hard clicked !" << endl;
+            // cout << "Hard clicked !" << endl;
             obstacleCounter = 8;
             level = Level::HARD;
             gameState = GameState::RUNNING;
         }
         else if (x > 1000 && y > 690 && x < 1200 && y < 770)
         {
-            cout << "Go back clicked !" << endl;
+            // cout << "Go back clicked !" << endl;
             gameState = GameState::IDLE;
         }
         Bhuruz::showScreens();
@@ -730,12 +720,12 @@ void Bhuruz::onClickHandler(int x, int y)
     {
         if (x > 430 && y > 350 && x < 943 && y < 520)
         {
-            cout << "Start clicked !" << endl;
+            // cout << "Start clicked !" << endl;
             gameState = GameState::LEVEL_SELECT;
         }
         else if (x > 450 && y > 500 && x < 963 && y < 670)
         {
-            cout << "Credits clicked !" << endl;
+            // cout << "Credits clicked !" << endl;
             gameState = GameState::CREDITS;
         }
         Bhuruz::showScreens();
@@ -744,7 +734,7 @@ void Bhuruz::onClickHandler(int x, int y)
     {
         if (x > 1000 && y > 690 && x < 1200 && y < 770)
         {
-            cout << "Go back clicked !" << endl;
+            // cout << "Go back clicked !" << endl;
             gameState = GameState::IDLE;
         }
         Bhuruz::showScreens();
@@ -762,15 +752,31 @@ void Bhuruz::makeMove(string direction)
     if (gameState == GameState::RUNNING)
     {
         vehicle->initVehicleMovement(direction);
+        if (theta <= 10 && rotationSwitch)
+        {
+
+            theta += 1;
+            if (theta >= 10)
+            {
+                rotationSwitch = false;
+            }
+        }
+        else
+        {
+            theta -= 1;
+            if (theta <= -10)
+            {
+                rotationSwitch = true;
+            }
+        }
+
         if (direction == "RIGHT")
         {
             backTheta += 10;
-            theta += 0.4;
         }
         else if (direction == "LEFT")
         {
             backTheta -= 10;
-            theta -= 0.4;
         }
     }
 }
@@ -785,6 +791,15 @@ Bhuruz::Bhuruz()
     screenObjects = {};
     obstacleObjects = {};
     scoreObjects = {};
+
+    // ? health
+    gameHealth = new Health();
+
+    // ? score
+    score = new Score();
+
+    // ? vehicle
+    vehicle = new Vehicle();
 
     theta = 0;
 

@@ -99,9 +99,9 @@ bool Game::loadMedia()
 	Drawing::startAssets = loadTexture("assets/start-assets.png");
 	Drawing::gameAssets = loadTexture("assets/game-assets.png");
 
-	Drawing::levelOne = loadTexture("assets/level1.png");
-	Drawing::levelTwo = loadTexture("assets/level2.png");
-	Drawing::levelThree = loadTexture("assets/level3.png");
+	Drawing::levelOne = loadTexture("assets/easy.png");
+	Drawing::levelTwo = loadTexture("assets/medium.png");
+	Drawing::levelThree = loadTexture("assets/hard.png");
 
 	gTexture = loadTexture("assets/background.png");
 

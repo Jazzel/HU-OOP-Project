@@ -133,6 +133,7 @@ private:
     bool collide = 0;
     int counter = 5;
     int obstacleCounter = 10;
+    bool rotationSwitch = 1;
 
 public:
     void init();

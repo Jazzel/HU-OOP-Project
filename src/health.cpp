@@ -24,19 +24,19 @@ void Health::updateHealth(Obstacles *obstacle)
     {
         Mix_PlayChannel(-1, Drawing::gCrash, 0);
         health -= 25;
-        cout << "Square detected" << endl;
+        // cout << "Square detected" << endl;
     }
     else if (typeid(*obstacle).name() == typeid(wall).name())
     {
         Mix_PlayChannel(-1, Drawing::gCrash, 0);
         health -= 50;
-        cout << "Wall detected" << endl;
+        // cout << "Wall detected" << endl;
     }
     else if (typeid(*obstacle).name() == typeid(bomb).name())
     {
         Mix_PlayChannel(-1, Drawing::gExplode, 0);
         health = 0;
-        cout << "Bomb detected" << endl;
+        // cout << "Bomb detected" << endl;
     }
     else if (typeid(*obstacle).name() == typeid(healthbump).name())
     {
@@ -44,13 +44,13 @@ void Health::updateHealth(Obstacles *obstacle)
         if (health != 100)
         {
             health += 25;
-            cout << "Health obstacle" << endl;
+            // cout << "Health obstacle" << endl;
         }
     }
     else
     {
         health -= 25;
-        cout << "Square detected 2.0" << endl;
+        // cout << "Square detected 2.0" << endl;
     }
 }
 /**
