@@ -67,8 +67,8 @@ void SquareObstacle::fly()
         mover.y += 10;
     }
 
-    mover.h += 5;
-    mover.w += 5;
+    mover.h += 4;
+    mover.w += 4;
 }
 /**
  * ? @brief SquareObstacle()

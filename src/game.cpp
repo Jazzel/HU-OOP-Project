@@ -222,7 +222,7 @@ SDL_Texture *Game::loadTexture(std::string path)
 void Game::run()
 {
 	bool quit = false;
-	int counter = 5;
+	int counter = 35;
 	SDL_Event e;
 
 	Bhuruz bhuruz;
@@ -253,20 +253,21 @@ void Game::run()
 					bhuruz.makeMove("LEFT");
 				}
 			}
-			if (Mix_PlayingMusic() == 0)
+		}
+
+		if (Mix_PlayingMusic() == 0)
+		{
+			Mix_PlayMusic(gMusic, -1);
+		}
+		else
+		{
+			if (Mix_PausedMusic() == 1)
 			{
-				Mix_PlayMusic(gMusic, -1);
-			}
-			else
-			{
-				if (Mix_PausedMusic() == 1)
+				counter--;
+				if (counter <= 0)
 				{
-					counter--;
-					if (!counter)
-					{
-						Mix_ResumeMusic();
-						counter = 10;
-					}
+					Mix_ResumeMusic();
+					counter = 35;
 				}
 			}
 		}

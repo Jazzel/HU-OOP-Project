@@ -54,8 +54,8 @@ void WallObstacle::fly()
         mover.x += 5;
         mover.y += 10;
     }
-    mover.h += 20;
-    mover.w += 10;
+    mover.h += 10;
+    mover.w += 5;
 }
 /**
  * ? @brief WallObstacle()

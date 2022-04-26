@@ -47,8 +47,8 @@ void BombObstacle::fly()
     {
         mover.y += 10;
     }
-    mover.h += 5;
-    mover.w += 5;
+    mover.h += 3;
+    mover.w += 3;
 }
 /**
  * ? @brief BombObstacle()

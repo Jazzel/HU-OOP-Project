@@ -39,7 +39,7 @@ void Vehicle::initVehicleMovement(string direction)
     }
     else if (direction == "LEFT")
     {
-        if (mover.y == 600 && mover.x >= 300)
+        if (mover.y == 600 && mover.x >= 380)
         {
             mover.x -= speed;
         }
@@ -69,7 +69,7 @@ void Vehicle::draw()
 /**
  * ? @brief Vehicle()
  * * empty vehicle constructor
- * * defines the mover and src of the vehicle 
+ * * defines the mover and src of the vehicle
  * * speed is set as by defualt 40
  */
 Vehicle::Vehicle()

@@ -700,21 +700,21 @@ void Bhuruz::onClickHandler(int x, int y)
         if (x > 260 && y > 310 && x < 940 && y < 430)
         {
             // cout << "Easy clicked !" << endl;
-            obstacleCounter = 15;
+            obstacleCounter = 30;
             level = Level::EASY;
             gameState = GameState::RUNNING;
         }
         else if (x > 300 && y > 450 && x < 980 && y < 570)
         {
             // cout << "Medium clicked !" << endl;
-            obstacleCounter = 10;
+            obstacleCounter = 20;
             level = Level::MEDIUM;
             gameState = GameState::RUNNING;
         }
         else if (x > 340 && y > 590 && x < 1020 && y < 710)
         {
             // cout << "Hard clicked !" << endl;
-            obstacleCounter = 8;
+            obstacleCounter = 10;
             level = Level::HARD;
             gameState = GameState::RUNNING;
         }
