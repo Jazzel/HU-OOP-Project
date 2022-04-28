@@ -35,6 +35,8 @@ public:
     Vehicle();
     ~Vehicle();
 
-    void initVehicleMovement(std::string);
+    void operator ++();
+    void operator --();
+    bool initVehicleMovement(std::string);
     void draw();
 };

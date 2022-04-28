@@ -5,24 +5,47 @@
 
 using namespace std;
 /**
+ * ? @brief operator ++()
+ * * increment the mover's x by speed
+ *
+ */
+void Vehicle::operator++ () {
+    mover.x += speed; 
+}
+/**
+ * ? @brief operator --()
+ * * decrement the mover's x by speed
+ *
+ *
+ */
+void Vehicle::operator-- () {
+    mover.x -= speed; 
+}
+
+
+
+/**
  * ? @brief initVehicleMovement()
  * * checks if the direction, a string type is right or left
  * * if the mover's coordinate are with in the range of movement
- * * then increment or decrement the mover's x by speed
  *
  * ? @param
  *
  * * direction - string, telling where the vehicle has to move
+ * !return 
+ * * a boolean telling if the vehicle has to be moved or not
  *
  */
-void Vehicle::initVehicleMovement(string direction)
+bool Vehicle::initVehicleMovement(string direction)
 {
     // cout << "Direction: " << direction << endl;
     if (direction == "RIGHT")
     {
         if (mover.y == 600 && mover.x <= 930)
         {
-            mover.x += speed;
+            // mover.x += speed;
+            return true;
+
         }
         // else if (mover.x >= 950 && mover.y >= 150)
         // {
@@ -41,7 +64,7 @@ void Vehicle::initVehicleMovement(string direction)
     {
         if (mover.y == 600 && mover.x >= 380)
         {
-            mover.x -= speed;
+           true;
         }
         // else if (mover.y == 100 && mover.x <= 950)
         // {
@@ -79,10 +102,13 @@ Vehicle::Vehicle()
 
     speed = 40;
 }
+
 /**
  * ? @brief ~Vehicle()
  * * destructor
  */
+
+
 Vehicle::~Vehicle()
 {
 }

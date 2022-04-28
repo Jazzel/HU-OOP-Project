@@ -115,15 +115,15 @@ void Bhuruz::drawObjects()
             {
                 if (level == Level::EASY)
                 {
-                    obstacleCounter = 15;
+                    obstacleCounter = 30;
                 }
                 else if (level == Level::MEDIUM)
                 {
-                    obstacleCounter = 10;
+                    obstacleCounter = 20;
                 }
                 else if (level == Level::HARD)
                 {
-                    obstacleCounter = 8;
+                    obstacleCounter = 10;
                 }
                 toggle = true;
             }
@@ -458,11 +458,23 @@ void Bhuruz::init()
  */
 void Bhuruz::showScreens()
 {
-    gameObjects = {};
-    screenObjects = {};
-    obstacleObjects = {};
-    scoreObjects = {};
 
+    while(!gameObjects.empty()) {
+        delete gameObjects.back();
+        gameObjects.pop_back();
+    }
+     while(!screenObjects.empty()) {
+        delete screenObjects.back();
+        screenObjects.pop_back();
+    }
+    while(!obstacleObjects.empty()) {
+        delete obstacleObjects.back();
+        obstacleObjects.pop_back();
+    }
+    while(!scoreObjects.empty()) {
+        delete scoreObjects.back();
+        scoreObjects.pop_back();
+    }
     theta = 0;
 
     toggle = 1;
@@ -621,7 +633,9 @@ void Bhuruz::detectCollision(Obstacles *obstacle, int i)
     if (SDL_HasIntersection(&obstacle->mover, &vehicle->mover))
     {
         // cout << "Crashed !!" << endl;
+        //
         gameHealth->updateHealth(obstacle);
+        delete obstacleObjects[i];
         obstacleObjects.erase(obstacleObjects.begin() + i);
 
         if (gameHealth->getHealth() <= 0)
@@ -660,6 +674,8 @@ void Bhuruz::detectCollision(float x, float y, float w, float h, Obstacles *obst
     {
         // cout << "Crashed !!" << endl;
         gameHealth->updateHealth(obstacle);
+        // -(*gamehealth)(obstacle);
+        delete obstacleObjects[i];
 
         obstacleObjects.erase(obstacleObjects.begin() + i);
         if (gameHealth->getHealth() <= 0)
@@ -760,7 +776,7 @@ void Bhuruz::makeMove(string direction)
 {
     if (gameState == GameState::RUNNING)
     {
-        vehicle->initVehicleMovement(direction);
+        
         if (theta <= 10 && rotationSwitch)
         {
 
@@ -781,10 +797,17 @@ void Bhuruz::makeMove(string direction)
 
         if (direction == "RIGHT")
         {
+            if(vehicle->initVehicleMovement(direction)) {
+                ++(*vehicle);
+            }
             backTheta += 10;
         }
         else if (direction == "LEFT")
         {
+            
+            if(vehicle->initVehicleMovement(direction)) {
+                --(*vehicle);
+            }
             backTheta -= 10;
         }
     }

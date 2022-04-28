@@ -14,6 +14,7 @@ using namespace std;
  */
 
 void Health::updateHealth(Obstacles *obstacle)
+// void Health::operator -(Obstacles *obstacle)
 {
     SquareObstacle square;
     WallObstacle wall;

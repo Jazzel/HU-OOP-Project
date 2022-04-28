@@ -36,6 +36,12 @@ using namespace std;
  * 
  * * Health():
  * *    a constructor function for the Health class
+ * 
+ * * operator ++()
+ * *    moving vehicle right
+ * 
+ * * operator --()
+ * *    moving vehicle left
  * */
 class Health : public Asset
 {
@@ -44,6 +50,7 @@ private:
 
 public:
     void updateHealth(Obstacles *obstacle);
+    void operator- (Obstacles *obstacle);
     void displayHealth();
     inline int getHealth() { return health; }
 

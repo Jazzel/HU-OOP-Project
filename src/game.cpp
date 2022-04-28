@@ -105,8 +105,8 @@ bool Game::loadMedia()
 
 	gTexture = loadTexture("assets/background.png");
 
-	// gMusic = Mix_LoadMUS("sounds/beat.wav");
-	gMusic = Mix_LoadMUS("sounds/RickRoll.wav");
+	gMusic = Mix_LoadMUS("sounds/beat.wav");
+	// gMusic = Mix_LoadMUS("sounds/RickRoll.wav");
 
 	Drawing::gCrash = Mix_LoadWAV("sounds/crash.wav");
 	Drawing::gHealth = Mix_LoadWAV("sounds/health.wav");
