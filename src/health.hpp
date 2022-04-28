@@ -50,7 +50,6 @@ private:
 
 public:
     void updateHealth(Obstacles *obstacle);
-    void operator- (Obstacles *obstacle);
     void displayHealth();
     inline int getHealth() { return health; }
 
